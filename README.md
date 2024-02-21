@@ -8,14 +8,15 @@ A web app that helps you get closer to your close ones though questions.
 
 ## User stories
 
-I can join a team with a team code.
-I can create a team with a new team code.
-I can play with sample decks and existing decks within a team.
-I can create a new deck within a team.
-I can edit an existing deck within a team.
-I can delete an existing deck within a team.
-I can search for an existing deck within a team.
-I can leave a team.
+As a player, I can join a group with a group code.
+As a player, I can create a group with a new group code.
+As a player, I want a main deck to play with.
+As a player, I can play with sample decks and existing decks within a group.
+As a player, I can create a new deck within a group.
+As a player, I can edit an existing deck within a group.
+As a player, I can delete an existing deck within a group.
+As a player, I can search for an existing deck within a group.
+As a player, I can leave a group.
 
 ## Task boards
 
