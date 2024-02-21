@@ -4,7 +4,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-A web app that helps you get closer to your close ones though questions.
+A web app that helps you get closer to your close ones through questions.
 
 ## User stories
 
