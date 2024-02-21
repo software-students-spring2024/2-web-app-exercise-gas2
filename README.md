@@ -10,7 +10,7 @@ A web app that helps you get closer to your close ones through questions.
 
 * As a player, I can log in.
 * As a player, I can sign up.
-* As a not logged-in player, I can play with sample decks.
+* As a not-logged-in player, I can play with sample decks.
 * As a logged-in player, I can play with sample decks and my personal decks.
 * As a logged-in player, I can create a new deck.
 * As a logged-in player, I can edit an existing deck.
