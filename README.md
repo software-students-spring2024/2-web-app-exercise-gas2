@@ -4,11 +4,21 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+A web app that helps you get closer to your close ones through questions.
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+As a player, I can join a group with a group code.
+As a player, I can create a group with a new group code.
+As a player, I want a main deck to play with.
+As a player, I can play with sample decks and existing decks within a group.
+As a player, I can create a new deck within a group.
+As a player, I can edit an existing deck within a group.
+As a player, I can delete an existing deck within a group.
+As a player, I can search for an existing deck within a group.
+As a player, I can leave a group.
+
+[Issues Page](https://github.com/software-students-spring2024/2-web-app-exercise-gas2/issues)
 
 ## Task boards
 
