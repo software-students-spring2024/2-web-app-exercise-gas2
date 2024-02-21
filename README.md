@@ -4,11 +4,18 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+A web app that helps you get closer to your close ones though questions.
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+I can join a team with a team code.
+I can create a team with a new team code.
+I can play with sample decks and existing decks within a team.
+I can create a new deck within a team.
+I can edit an existing deck within a team.
+I can delete an existing deck within a team.
+I can search for an existing deck within a team.
+I can leave a team.
 
 ## Task boards
 
