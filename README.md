@@ -19,4 +19,4 @@ I can leave a team.
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[Issues Page](https://github.com/software-students-spring2024/2-web-app-exercise-gas2/issues)
