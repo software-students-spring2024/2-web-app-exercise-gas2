@@ -4,7 +4,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-A web app that helps you get closer to your close ones through questions.
+A web app card game that fosters deeper connections with others through question prompts.
 
 ## User stories
 
@@ -23,3 +23,7 @@ A web app that helps you get closer to your close ones through questions.
 ## Task boards
 
 [Sprint 1 Task Board](https://github.com/orgs/software-students-spring2024/projects/4)
+
+## Design
+
+Prototype [https://www.figma.com/file/MtmBlXWq7G9Axki5tmboSd/Project-2?type=design&node-id=0%3A1&mode=design&t=mF8G6yOHcrtvsROr-1]
