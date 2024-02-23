@@ -21,3 +21,9 @@ try:
     print("Connected to MongoDB!")
 except Exception as e:
     print("MongoDB connection error:", e)
+
+
+# run the app
+if __name__ == "__main__":
+    FLASK_PORT = os.getenv("FLASK_PORT", "5000")
+    app.run(port=FLASK_PORT)
