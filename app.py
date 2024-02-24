@@ -22,6 +22,9 @@ try:
 except Exception as e:
     print("MongoDB connection error:", e)
 
+@app.route("/")
+def home():
+    return render_template('mainScreen.html')
 
 # run the app
 if __name__ == "__main__":
