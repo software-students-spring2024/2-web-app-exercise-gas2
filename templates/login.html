@@ -4,18 +4,66 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
-        
+        <link rel="stylesheet" href="/static/css/style.css">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #5E4D47;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 80vh;
+            }
+
+            .login-container {
+                background-color: #FAFAFA;
+                padding: 25px;
+                border-radius: 50px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 275px;
+                width: 90%;
+                text-align: center;
+            }
+
+            .login-container input[type="username"],
+            .login-container input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #FAFAFA;
+                border-radius: 4px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                box-sizing: border-box;
+            }
+
+            .login-container input[type="username"]::placeholder,
+            .login-container input[type="password"]::placeholder {
+                color: #B05E57;
+            }
+            
+            .login-container input[type="submit"] {
+                width: 100%;
+                padding: 15px;
+                margin: 10px 0;
+                background-color: #E1948D;
+                border: 1px solid #E1948D;
+                border-radius: 4px;
+                color: #FAFAFA;
+                cursor: pointer;
+                box-sizing: border-box;
+                font-weight: bold;
+            }
+
+        </style>
     </head>
     <body>
         <div class="login-container">
             <form action={{action}} method="post">
-                <input type="text" name="username" placeholder="Username" required>
+                <input type="username" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="submit" value="Login">
             </form>
         </div>
-        <footer>
-            <p>&copy; 2024 Dive Deeper</p>
-        </footer>
     </body>
 </html>
