@@ -11,9 +11,16 @@
                 padding: 0;
                 background-color: #5E4D47;
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                /*justify-content: center;
+                align-items: center;*/
+                flex-direction: column;
                 height: 80vh;
+            }
+
+            header {
+                color: #E1948D;
+                padding: 10px 20px;
+                text-align: center;
             }
 
             .login-container {
@@ -24,6 +31,7 @@
                 max-width: 275px;
                 width: 90%;
                 text-align: center;
+                margin: auto;
             }
 
             .login-container input[type="username"],
@@ -58,6 +66,7 @@
         </style>
     </head>
     <body>
+        <header> <h1>DIVE DEEPER</h1> </header>
         <div class="login-container">
             <form action={{action}} method="post">
                 <input type="username" name="username" placeholder="Username" required>
