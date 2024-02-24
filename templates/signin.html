@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>Sign In</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #5E4D47;
+                display: flex;
+                flex-direction: column;
+                height: 80vh;
+            }
+
+            header {
+                color: #E1948D;
+                padding: 20px 20px;
+                text-align: center;
+                font-size: 25px;
+            }
+
+            .signup-container {
+                background-color: #FAFAFA;
+                padding: 35px;
+                border-radius: 50px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 300px;
+                width: 90%;
+                text-align: center;
+                margin: auto;
+            }
+
+            .signup-container input[type="username"],
+            .signup-container input[type="password"],
+            .signup-container input[type="confirm-password"] {
+                width: 100%;
+                padding: 15px;
+                margin: 10px 0;
+                border: 1px solid #FAFAFA;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                box-sizing: border-box;
+            }
+
+            .signup-container input[type="username"]::placeholder,
+            .signup-container input[type="password"]::placeholder,
+            .signup-container input[type="confirm-password"]::placeholder {
+                color: #B05E57;
+            }
+
+            .signup-container input[type="submit"] {
+                width: 100%;
+                padding: 20px;
+                margin: 10px 0;
+                background-color: #E1948D;
+                border: 1px solid #E1948D;
+                border-radius: 4px;
+                color: #FAFAFA;
+                cursor: pointer;
+                box-sizing: border-box;
+                font-weight: bold;
+            }
+
+            .signup-container input[type="submit"]:hover {
+                background-color: #B05E57;
+                border: 1px solid #B05E57;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header> <h1> DIVE DEEPER</h1></header>
+        <div class="signup-container">
+            <form action="{{action}}" method="post">
+                <input type="username" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
+    </body>
+</html>
