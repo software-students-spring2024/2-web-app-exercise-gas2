@@ -6,4 +6,4 @@ def login():
 def signup():
     return render_template('signup.html')
 
-
+# TODO: Handle autehentication and session management with flask-login

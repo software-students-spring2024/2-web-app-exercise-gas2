@@ -28,27 +28,17 @@ try:
     print("Connected to MongoDB!")
 except Exception as e:
     print("MongoDB connection error:", e)
-
+    
 @app.route("/")
 def home():
+    # Note: (Ahmet) I will do these 
     # TODO: redirect to login 
     # TODO: redirect to sign up
     return render_template('start.html')
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    # would get form fields
-    # would check if correct username and password
-    return render_template('login.html')
-
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    #would add user to db
-    #would redirect to template for login
-    return render_template('signup.html')
-
-app.add_url_rule('/login', view_func=authentication.login)
-app.add_url_rule('/signup', view_func=authentication.signup)
+# Handle authentication related stuff in authentication.py file
+app.add_url_rule('/login', methods=["GET", "POST"], view_func=authentication.login)
+app.add_url_rule('/signup', methods=["GET", "POST"], view_func=authentication.signup)
 
 @app.route("/<username>/decks")
 def allDecks(username):
