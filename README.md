@@ -26,4 +26,4 @@ A web app card game that fosters deeper connections with others through question
 
 ## Design
 
-Prototype [https://www.figma.com/file/MtmBlXWq7G9Axki5tmboSd/Project-2?type=design&node-id=0%3A1&mode=design&t=mF8G6yOHcrtvsROr-1]
+[Prototype](https://www.figma.com/file/MtmBlXWq7G9Axki5tmboSd/Project-2?type=design&node-id=0%3A1&mode=design&t=mF8G6yOHcrtvsROr-1)
