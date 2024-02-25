@@ -51,6 +51,16 @@ def addCard(username, deckTitle):
     # would redirect to template for Cards
     return "added card"
 
+@app.route("/<username>/<deckTitle>/<cardIndex>/edit", methods=["POST"])
+def editCard(username, deckTitle, cardIndex):
+    # would need to first find user in db, but not set up yet
+    deck = db.decks.find_one({"title": deckTitle})
+    newCard = request.form["question"]
+    deck["cards"][int(cardIndex)] = newCard
+    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    # would redirect to template for Cards
+    return "edited card"
+
 # run the app
 if __name__ == "__main__":
     FLASK_PORT = os.getenv("FLASK_PORT", "5000")
