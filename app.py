@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import pymongo
 from pymongo import MongoClient
+import authentication
 
 load_dotenv()
 
@@ -10,6 +11,12 @@ app = Flask(__name__)
 
 uri = os.getenv("MONGO_URI")
 db_name = os.getenv("MONGO_DBNAME")
+
+# Display error message if mongoDB environment is not set up
+if not uri or not db_name:
+    error_message = "MongoDB environment is not set up. Please check your environment variables."
+    app.logger.error(error_message)
+    raise EnvironmentError(error_message)
 
 # Create a new client and connect to the server
 client = MongoClient(uri)
@@ -21,24 +28,17 @@ try:
     print("Connected to MongoDB!")
 except Exception as e:
     print("MongoDB connection error:", e)
-
+    
 @app.route("/")
 def home():
+    # Note: (Ahmet) I will do these 
     # TODO: redirect to login 
     # TODO: redirect to sign up
     return render_template('start.html')
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    # would get form fields
-    # would check if correct username and password
-    return render_template('login.html')
-
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    #would add user to db
-    #would redirect to template for login
-    return render_template('signup.html')
+# Handle authentication related stuff in authentication.py file
+app.add_url_rule('/login', methods=["GET", "POST"], view_func=authentication.login)
+app.add_url_rule('/signup', methods=["GET", "POST"], view_func=authentication.signup)
 
 @app.route("/<username>/decks")
 def allDecks(username):
