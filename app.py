@@ -26,6 +26,18 @@ except Exception as e:
 def home():
     return render_template('mainScreen.html')
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    # would get form fields
+    # would check if correct username and password
+    return render_template('login.html')
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    #would add user to db
+    #would redirect to template for login
+    return render_template('signup.html')
+
 @app.route("/<username>/decks")
 def allDecks(username):
     # would need to first find user in db, but not set up yet
