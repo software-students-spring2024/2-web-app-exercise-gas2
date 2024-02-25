@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import pymongo
 from pymongo import MongoClient
+import authentication
 
 load_dotenv()
 
@@ -46,13 +47,8 @@ def signup():
     #would redirect to template for login
     return render_template('signup.html')
 
-@app.route('/login', methods=['GET'])
-def login():
-    return render_template('login.html')
-
-@app.route('/signup', methods=['GET'])
-def signup():
-    return render_template('signup.html')
+app.add_url_rule('/login', view_func=authentication.login)
+app.add_url_rule('/signup', view_func=authentication.signup)
 
 @app.route("/<username>/decks")
 def allDecks(username):
