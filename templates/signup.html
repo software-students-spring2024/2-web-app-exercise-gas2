@@ -3,10 +3,11 @@
 {% block container %}
 
 <div class="card">
-    <form class="vertical-align" action={{action}} method="post">
+    <form class="vertical-align" action="{{action}}" method="post">
         <input class="user-input" type="username" name="username" placeholder="Username" required>
         <input class="user-input" type="password" name="password" placeholder="Password" required>
-        <input class="button" type="submit" value="Login">
+        <input class="user-input" type="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+        <input class="button" type="submit" value="Sign Up">
     </form>
 </div>
 

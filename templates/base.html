@@ -4,7 +4,7 @@
     <title>DIVE DEEPER Mobile Web App</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
+      href="/static/css/style.css"
     />
   </head>
   <body>
@@ -13,19 +13,16 @@
         <div class="logo">
             <div class="title">
               <h1>DIVE DEEPER</h1>
-              <nav>
-                <a href="{{ url_for('home')}}">Home</a>
-              </nav>
             </div>
           </div>        
       </header>
     </div>
 
-    <div class="container">
-        <div class="card">
-            <h3>build deeper connections with people.<h3>
-            </div>
-      </div>
+	<main>{% block container %} {% endblock %}</main>
+    
+    <div class="image">
+      <img src="/static/images/otter.gif" alt="otter.gif">
+    </div>
       
   </body>
 </html>
