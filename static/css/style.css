@@ -16,6 +16,13 @@ h3 {
   font-size: 55px;
 }
 
+.main-deck h3,
+.personal-deck h3 {
+  color: #FAFAFA;
+  text-align: center;
+  font-size: 55px;
+}
+
 .card {
   display: flex;
   justify-content: center;
@@ -27,6 +34,26 @@ h3 {
   background: #fafafa;
   padding: 10px;
   margin-bottom: 10%; 
+}
+
+.main-deck,
+.personal-deck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 90%;
+  aspect-ratio: 8 / 5;
+  padding: 10px;
+  margin-bottom: 10%; 
+}
+
+.main-deck {
+  background: #e1948d;
+}
+
+.personal-deck {
+  background: #7F5F59;
 }
 
 .vertical-align {
@@ -47,6 +74,21 @@ h3 {
   margin: 10px 0;
   background-color: #E1948D;
   border: 1px solid #E1948D;
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #FAFAFA;
+  font-size: 50px;
+}
+
+.button2 {
+  width: 100%;
+  height: 25%;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #7F5F59;
+  border: 1px solid #7F5F59;
   border-radius: 4px;
   cursor: pointer;
   box-sizing: border-box;
