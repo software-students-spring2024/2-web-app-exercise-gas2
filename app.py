@@ -37,8 +37,7 @@ def home():
         elif 'sign-up' in request.form:
             return redirect('/signup')
         elif 'play-as-guest' in request.form:
-            pass
-            # TODO: redirect to play as guest
+            return redirect('/guest/decks')
     return render_template('start.html')
 
 # Handle authentication related stuff in authentication.py file
@@ -54,7 +53,7 @@ def signup():
 def allDecks(username):
     # would need to first find user in db, but not set up yet
     # would redirect to template for Decks
-    return f'{username} decks'
+    return render_template('decks.html')
 
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):
