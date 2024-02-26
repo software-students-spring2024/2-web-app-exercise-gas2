@@ -29,11 +29,16 @@ try:
 except Exception as e:
     print("MongoDB connection error:", e)
     
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    # Note: (Ahmet) I will do these 
-    # TODO: redirect to login 
-    # TODO: redirect to sign up
+    if request.method == 'POST':
+        if 'login' in request.form:
+            return redirect('/login') 
+        elif 'sign-up' in request.form:
+            return redirect('/signup')
+        elif 'play-as-guest' in request.form:
+            pass
+            # TODO: redirect to play as guest
     return render_template('start.html')
 
 # Handle authentication related stuff in authentication.py file
