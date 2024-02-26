@@ -84,6 +84,15 @@ def editCard(username, deckTitle, cardIndex):
     # would redirect to template for Cards
     return "edited card"
 
+@app.route("/<username>/<deckTitle>/<cardIndex>/delete")
+def deleteCard(username, deckTitle, cardIndex):
+    # would need to first find user in db, but not set up yet
+    deck = db.decks.find_one({"title": deckTitle})
+    deck["cards"].pop(int(cardIndex))
+    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    # would redirect to template for Cards
+    return "deleted card"
+
 # run the app
 if __name__ == "__main__":
     FLASK_PORT = os.getenv("FLASK_PORT", "5000")
