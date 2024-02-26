@@ -93,6 +93,13 @@ def deleteCard(username, deckTitle, cardIndex):
     # would redirect to template for Cards
     return "deleted card"
 
+@app.route("/<username>/<deckTitle>/delete")
+def deleteDeck(username, deckTitle):
+    # would need to first find user in db, but not set up yet
+    db.decks.delete_one({"title": deckTitle})
+    # would redirect to template for Cards
+    return "deleted deck"
+
 # run the app
 if __name__ == "__main__":
     FLASK_PORT = os.getenv("FLASK_PORT", "5000")
