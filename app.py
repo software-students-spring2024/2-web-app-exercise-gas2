@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, make_response
-import authentication
-import db
+from authentication import *
+from db import * 
 
 app = Flask(__name__)
 
@@ -27,8 +27,8 @@ def signup():
 @app.route("/<username>/decks")
 def allDecks(username):
     # would need to first find user in db, but not set up yet
-    # would redirect to template for Decks
-    return render_template('decks.html', mainDecks=db.decks.find())
+    mainDecks = db.decks.find({})
+    return render_template('decks.html', mainDecks=mainDecks)
 
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):

@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session
 from flask_login import LoginManager
-import db
+from db import *
 
 
 login_manager = LoginManager()
