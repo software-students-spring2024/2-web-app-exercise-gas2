@@ -37,7 +37,6 @@ def home():
         elif 'sign-up' in request.form:
             return redirect('/signup')
         elif 'play-as-guest' in request.form:
-            print("here")
             return redirect('/guest/decks')
     return render_template('start.html')
 
