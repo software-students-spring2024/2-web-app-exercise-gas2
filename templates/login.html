@@ -3,7 +3,7 @@
 {% block container %}
 
 <div class="card">
-    <form class="vertical-align" action={{action}} method="post">
+    <form class="vertical-align" action={{url_for('login')}} method="post">
         <input class="user-input" type="username" name="username" placeholder="Username" required>
         <input class="user-input" type="password" name="password" placeholder="Password" required>
         <input class="button" type="submit" value="Login">
