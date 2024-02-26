@@ -18,11 +18,11 @@ def home():
 # Handle authentication related stuff in authentication.py file
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    return authentication.login()
+    return authLogin()
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
-    return authentication.signup()
+    return authSignup()
 
 @app.route("/<username>/decks")
 def allDecks(username):
