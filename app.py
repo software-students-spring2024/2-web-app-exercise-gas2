@@ -42,8 +42,13 @@ def home():
     return render_template('start.html')
 
 # Handle authentication related stuff in authentication.py file
-app.add_url_rule('/login', methods=["GET", "POST"], view_func=authentication.login)
-app.add_url_rule('/signup', methods=["GET", "POST"], view_func=authentication.signup)
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    return authentication.login(db)
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    return authentication.signup(db)
 
 @app.route("/<username>/decks")
 def allDecks(username):
