@@ -2,26 +2,13 @@
 
 {% block container %}
 
-<!--
-<div class="main-deck">
-    <h3> Test 1</h3>
+<!--IN WORKS: need to change the temps-->
+<div class="temp">
+    <form class="vertical-alig" method="post">
+        {% for deck in mainDecks %}
+        <button class="main-deck" type="submit" name="temp"><h3>{{deck.title}}</h3></button>
+        {% endfor %}
+    </form>
 </div>
-
-<div class="personal-deck">
-    <h3> Test 2</h3>
-</div>
--->
-
-{% for deck in mainDecks %}
-<div class="main-deck">
-    <h3> {{deck.name}}</h3>
-</div>
-{% endfor %}
-
-{% for deck in personalDecks %}
-<div class="personal-deck">
-    <h3> {{deck.name}}</h3>
-</div>
-{% endfor %}
 
 {% endblock %}
