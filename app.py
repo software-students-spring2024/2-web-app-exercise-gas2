@@ -1,34 +1,9 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, make_response
-from dotenv import load_dotenv
-import os
-import pymongo
-from pymongo import MongoClient
 import authentication
-
-load_dotenv()
+import db
 
 app = Flask(__name__)
 
-uri = os.getenv("MONGO_URI")
-db_name = os.getenv("MONGO_DBNAME")
-
-# Display error message if mongoDB environment is not set up
-if not uri or not db_name:
-    error_message = "MongoDB environment is not set up. Please check your environment variables."
-    app.logger.error(error_message)
-    raise EnvironmentError(error_message)
-
-# Create a new client and connect to the server
-client = MongoClient(uri)
-db = client[db_name]
-
-# Send a ping to confirm a successful connection
-try:
-    client.admin.command('ping')
-    print("Connected to MongoDB!")
-except Exception as e:
-    print("MongoDB connection error:", e)
-    
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == 'POST':
@@ -43,11 +18,11 @@ def home():
 # Handle authentication related stuff in authentication.py file
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    return authentication.login(db)
+    return authentication.login()
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
-    return authentication.signup(db)
+    return authentication.signup()
 
 @app.route("/<username>/decks")
 def allDecks(username):
