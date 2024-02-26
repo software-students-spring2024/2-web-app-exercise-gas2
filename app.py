@@ -28,7 +28,7 @@ def signup():
 def allDecks(username):
     # would need to first find user in db, but not set up yet
     # would redirect to template for Decks
-    return render_template('decks.html')
+    return render_template('decks.html', mainDecks=db.decks.find())
 
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):
