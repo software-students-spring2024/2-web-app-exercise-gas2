@@ -2,13 +2,16 @@
 
 {% block container %}
 
-<!--IN WORKS: need to change the temps-->
-<div class="temp">
-    <form class="vertical-alig" method="post">
-        {% for deck in mainDecks %}
-        <button class="main-deck" type="submit" name="temp"><h3>{{deck.title}}</h3></button>
-        {% endfor %}
-    </form>
+{% for deck in mainDecks %}
+<div class="main-deck">
+    <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}"><h3>{{ deck.title }}</h3></a>
 </div>
+{% endfor %}
+
+{% for deck in personalDecks %}
+<div class="personal-deck">
+    <a href="{{ url_for('home') }}"><h3>{{ deck.title }}</h3></a>
+</div>
+{% endfor %}
 
 {% endblock %}

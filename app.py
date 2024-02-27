@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, make_response
 from authentication import *
 from db import * 
+import random
 
 app = Flask(__name__)
 
@@ -27,8 +28,31 @@ def signup():
 @app.route("/<username>/decks")
 def allDecks(username):
     # would need to first find user in db, but not set up yet
-    mainDecks = db.decks.find({})
-    return render_template('decks.html', mainDecks=mainDecks)
+    if username == "guest":
+        mainDecks = db.decks.find({})
+        return render_template('decks.html', mainDecks=mainDecks)
+    else:
+        return "to do: for users"
+
+@app.route("/<username>/<deckTitle>")
+def displayDeck(username, deckTitle):
+    if username == "guest":
+        # get the list of cards for the deck
+        currentDeck = db.decks.find_one({"title": deckTitle})
+        cardList = currentDeck['cards']
+        # generate a random index to generate a random card
+        index = random.randint(0, len(cardList)-1)
+        question = cardList[index]
+        # remove card to avoid repetition
+        cardList.pop(index) 
+
+        return render_template('card.html', deckTitle=deckTitle, question=question, username=username)
+
+        if 'add-card' in request.form:
+            return redirect('/username/deckTitle/add')
+        elif 'edit' in request.form:
+            return redirect('/username/deckTitle/index/add')
+    return "temp"
 
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):
