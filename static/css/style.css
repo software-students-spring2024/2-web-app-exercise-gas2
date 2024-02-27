@@ -116,3 +116,7 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+.signup-error {
+  font-size: 25px;
+}
