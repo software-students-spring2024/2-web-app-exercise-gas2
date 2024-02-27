@@ -38,14 +38,15 @@ def allDecks(username):
 def displayDeck(username, deckTitle):
     if username == "guest":
         # get the list of cards for the deck
-        cardList = db.decks.find_one({"title": deckTitle}).cards
+        currentDeck = db.decks.find_one({"title": deckTitle})
+        cardList = currentDeck['cards']
         # generate a random index to generate a random card
-        index = random.randint(0, len(cardList))
+        index = random.randint(0, len(cardList)-1)
         question = cardList[index]
         # remove card to avoid repetition
         cardList.pop(index) 
 
-        render_template('card.html', deckTitle=deckTitle, question=question, username=username)
+        return render_template('card.html', deckTitle=deckTitle, question=question, username=username)
 
         if 'add-card' in request.form:
             return redirect('/username/deckTitle/add')
