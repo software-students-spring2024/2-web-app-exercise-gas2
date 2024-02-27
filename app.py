@@ -47,11 +47,6 @@ def displayDeck(username, deckTitle):
         cardList.pop(index) 
 
         return render_template('card.html', deckTitle=deckTitle, question=question, username=username, cardList=cardList)
-
-        if 'add-card' in request.form:
-            return redirect('/username/deckTitle/add')
-        elif 'edit' in request.form:
-            return redirect('/username/deckTitle/index/add')
     return "temp"
 
 @app.route("/<username>/create", methods=["POST"])

@@ -12,9 +12,11 @@
         </div>
     {% endfor %}  
 
-    <form class="vertical-align" method="post">
-        <button class="button2" type="submit" name="add-card">Add Card</button>
-        <button class="button2" type="submit" name="edit">Edit</button>
-    </form>
+    <a href="{{ url_for('addCard', username='guest', deckTitle='temp') }}" style="text-decoration:none">
+        <button class="button2" >Add Card</button>
+    </a>
+    <a href="{{ url_for('editCard', username='guest', deckTitle='temp', cardIndex='1' ) }}" style="text-decoration:none">
+        <button class="button2">Edit</button>
+    </a>
 
 {% endblock %}
