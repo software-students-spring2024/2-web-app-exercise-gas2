@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, make_response
+from flask_login import current_user
 from authentication import *
 from db import * 
 import random
 
 app = Flask(__name__)
+login_manager.init_app(app)
+
+# Secret key for login session management, set this up in your .env file 
+load_dotenv()
+app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -19,20 +25,25 @@ def home():
 # Handle authentication related stuff in authentication.py file
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    return authLogin()
+    return auth_login()
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
-    return authSignup()
+    return auth_signup()
 
 @app.route("/<username>/decks")
 def allDecks(username):
-    # would need to first find user in db, but not set up yet
     if username == "guest":
         mainDecks = db.decks.find({})
         return render_template('decks.html', mainDecks=mainDecks)
     else:
-        return "to do: for users"
+        if (not current_user.is_authenticated or current_user.id != username):
+            # TODO: Implement proper 404 screen to redirect here.
+            return username + " needs to log in first."
+        else:
+            # TODO: Redirect to the decks of the current user
+            return "Here would be the decks of " + current_user.id + "."
+
 
 @app.route("/<username>/<deckTitle>")
 def displayDeck(username, deckTitle):
@@ -103,3 +114,4 @@ def deleteDeck(username, deckTitle):
 if __name__ == "__main__":
     FLASK_PORT = os.getenv("FLASK_PORT", "5000")
     app.run(port=FLASK_PORT)
+
