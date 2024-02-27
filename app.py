@@ -4,6 +4,12 @@ from db import *
 import random
 
 app = Flask(__name__)
+login_manager.init_app(app)
+
+# Secret key for login session management, set this up in your .env file 
+load_dotenv()
+app.secret_key = os.getenv("SECRET_KEY")
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -103,3 +109,4 @@ def deleteDeck(username, deckTitle):
 if __name__ == "__main__":
     FLASK_PORT = os.getenv("FLASK_PORT", "5000")
     app.run(port=FLASK_PORT)
+
