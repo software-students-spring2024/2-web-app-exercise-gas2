@@ -5,11 +5,12 @@
     <div class="box">
         <h2> {{ deckTitle }}</h2>
     </div>
+    
     {% for question in cardList %}
-        <div class="card">
+        <div class="card2">
             <h3>{{ question }}</h3>
         </div>
-    {% endfor %}
+    {% endfor %}  
 
     <form class="vertical-align" method="post">
         <button class="button2" type="submit" name="add-card">Add Card</button>
