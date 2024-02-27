@@ -3,15 +3,19 @@
 {% block container %}
 
     {% for deck in mainDecks %}
-    <div class="main-deck">
-        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}"><h3>{{ deck.title }}</h3></a>
-    </div>
+        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}" style="text-decoration:none">
+            <button class="main-deck">
+                <h3>{{ deck.title }}</h3>
+            </button>
+        </a>
     {% endfor %}
 
     {% for deck in personalDecks %}
-    <div class="personal-deck">
-        <a href="{{ url_for('home') }}"><h3>{{ deck.title }}</h3></a>
-    </div>
+        <a href="{{ url_for('home') }}" style="text-decoration:none">
+            <button class="personal-deck">
+                <h3>{{ deck.title }}</h3>
+            </button>
+        </a>
     {% endfor %}
 
 {% endblock %}

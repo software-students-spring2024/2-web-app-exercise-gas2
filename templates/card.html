@@ -2,7 +2,9 @@
 
 {% block container %}
 
-    <h3> {{ deckTitle }}</h3>
+    <div class="box">
+        <h2> {{ deckTitle }}</h2>
+    </div>
     {% for question in cardList %}
         <div class="card">
             <h3>{{ question }}</h3>
