@@ -46,7 +46,7 @@ def displayDeck(username, deckTitle):
         # remove card to avoid repetition
         cardList.pop(index) 
 
-        return render_template('card.html', deckTitle=deckTitle, question=question, username=username)
+        return render_template('card.html', deckTitle=deckTitle, question=question, username=username, cardList=cardList)
 
         if 'add-card' in request.form:
             return redirect('/username/deckTitle/add')
