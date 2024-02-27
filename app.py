@@ -34,19 +34,29 @@ def allDecks(username):
     else:
         return "to do: for users"
 
-@app.route("/<username>/<deckTitle>")
-def displayDeck(username, deckTitle):
+@app.route("/<username>/<deckTitle>/<cardIndex>")
+def displayDeck(username, deckTitle, cardIndex):
     if username == "guest":
+        # # get the list of cards for the deck
+        # currentDeck = db.decks.find_one({"title": deckTitle})
+        # cardList = currentDeck['cards']
+        # # generate a random index to generate a random card
+        # index = random.randint(0, len(cardList)-1)
+        # question = cardList[index]
+        # # remove card to avoid repetition
+        # cardList.pop(index) 
+
+        cardIndex = int(cardIndex) + 1
+        print(cardIndex)
+
         # get the list of cards for the deck
         currentDeck = db.decks.find_one({"title": deckTitle})
         cardList = currentDeck['cards']
-        # generate a random index to generate a random card
-        index = random.randint(0, len(cardList)-1)
-        question = cardList[index]
-        # remove card to avoid repetition
-        cardList.pop(index) 
 
-        return render_template('card.html', deckTitle=deckTitle, question=question, username=username, cardList=cardList)
+        question = cardList[int(cardIndex)]
+    
+
+        return render_template('card.html', deckTitle=deckTitle, question=question, username=username, cardIndex=cardIndex)
     return "temp"
 
 @app.route("/<username>/create", methods=["POST"])

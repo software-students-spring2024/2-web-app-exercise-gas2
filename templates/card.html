@@ -6,16 +6,17 @@
         <h2> {{ deckTitle }}</h2>
     </div>
     
-    {% for question in cardList %}
+    <a href="{{ url_for('displayDeck', username='guest', deckTitle=deckTitle, cardIndex=cardIndex )}}">
         <div class="card">
             <h3>{{ question }}</h3>
         </div>
-    {% endfor %}  
+    </a>
 
-    <a href="{{ url_for('addCard', username='guest', deckTitle='temp') }}" style="text-decoration:none">
+
+    <a href="{{ url_for('addCard', username='guest', deckTitle=deckTitle) }}" style="text-decoration:none">
         <button class="button2" >Add Card</button>
     </a>
-    <a href="{{ url_for('editCard', username='guest', deckTitle='temp', cardIndex='1' ) }}" style="text-decoration:none">
+    <a href="{{ url_for('editCard', username='guest', deckTitle=deckTitle, cardIndex=cardIndex ) }}" style="text-decoration:none">
         <button class="button2">Edit</button>
     </a>
 
