@@ -48,21 +48,14 @@ def allDecks(username):
 @app.route("/<username>/<deckTitle>")
 def displayDeck(username, deckTitle):
     if username == "guest":
+
         # get the list of cards for the deck
         currentDeck = db.decks.find_one({"title": deckTitle})
         cardList = currentDeck['cards']
-        # generate a random index to generate a random card
-        index = random.randint(0, len(cardList)-1)
-        question = cardList[index]
-        # remove card to avoid repetition
-        cardList.pop(index) 
 
-        return render_template('card.html', deckTitle=deckTitle, question=question, username=username)
+        # TODO: shuffle cards
 
-        if 'add-card' in request.form:
-            return redirect('/username/deckTitle/add')
-        elif 'edit' in request.form:
-            return redirect('/username/deckTitle/index/add')
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
     return "temp"
 
 @app.route("/<username>/create", methods=["POST"])

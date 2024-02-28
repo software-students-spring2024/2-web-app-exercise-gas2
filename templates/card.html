@@ -1,14 +1,37 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<h3> {{ deckTitle }}</h3>
-<div class="card">
-    <h3>{{ question }}</h3>
-</div>
 
-<form class="vertical-align" method="post">
-    <button class="button2" type="submit" name="add-card">Add Card</button>
-    <button class="button2" type="submit" name="edit">Edit</button>
-</form>
+    <div class="box">
+        <h2> {{ deckTitle }}</h2>
+    </div>
+    
+    <div class="card">
+        <h3 id="next-question"> START </h3>
+    </div>
+
+
+    <a href="{{ url_for('addCard', username='guest', deckTitle=deckTitle) }}" style="text-decoration:none">
+        <button class="button2" >Add Card</button>
+    </a>
+    <a href="{{ url_for('editCard', username='guest', deckTitle=deckTitle, cardIndex=cardIndex ) }}" style="text-decoration:none">
+        <button class="button2">Edit</button>
+    </a>
+
+    <script>
+        const nextQuestion = document.querySelector("#next-question");
+        var cardIndex = 0;
+
+        var questions = '{{ cardList }}'
+        questions = questions.replaceAll("&#39;","\"")
+        var cardList = Array.from(JSON.parse(questions))
+
+        nextQuestion.addEventListener("click", function() {
+            nextQuestion.textContent = cardList[cardIndex];
+            cardIndex += 1;
+            console.log(cardIndex)
+        });
+    </script>
 
 {% endblock %}
+
