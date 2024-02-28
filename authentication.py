@@ -63,7 +63,7 @@ def auth_signup():
             return render_template('signup.html', username_taken=False, passwords_dont_match=True)
         else:
             user = User(user_id, generate_password_hash(password))
-            db['users'].insert_one({"user_id": user.id, "password": user.password})
+            db['users'].insert_one({"user_id": user.id, "password": user.password, 'mainDecks': [], 'personalDecks': []})
             login_user(user)
             # TODO: Redirect to the appropriate page for the logged in user
             return redirect('/' + user_id + '/decks')

@@ -38,11 +38,10 @@ def allDecks(username):
         return render_template('decks.html', mainDecks=mainDecks)
     else:
         if (not current_user.is_authenticated or current_user.id != username):
-            # TODO: Implement proper 404 screen to redirect here.
-            return username + " needs to log in first."
+            return redirect('/login')
         else:
-            # TODO: Redirect to the decks of the current user
-            return "Here would be the decks of " + current_user.id + "."
+            user = db.users.find_one({'user_id': current_user.id})
+            return render_template('decks.html', mainDecks = user['mainDecks'], personalDecks = user['personalDecks'])
 
 
 @app.route("/<username>/<deckTitle>")
