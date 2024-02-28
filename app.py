@@ -47,13 +47,11 @@ def allDecks(username):
 @app.route("/<username>/<deckTitle>")
 def displayDeck(username, deckTitle):
     if username == "guest":
-
         # get the list of cards for the deck
         currentDeck = db.decks.find_one({"title": deckTitle})
         cardList = currentDeck['cards']
-
-        # TODO: shuffle cards
-
+        # shuffle deck
+        random.shuffle(cardList)
         return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
     return "temp"
 
