@@ -6,10 +6,9 @@
         <h2> {{ deckTitle }}</h2>
     </div>
     
-    <div class="card">
+    <div id="card" class="card">
         <h3 id="next-question"> START </h3>
     </div>
-
 
     <a href="{{ url_for('addCard', username='guest', deckTitle=deckTitle) }}" style="text-decoration:none">
         <button class="button2" >Add Card</button>
@@ -20,16 +19,19 @@
 
     <script>
         const nextQuestion = document.querySelector("#next-question");
+        const card = document.querySelector("#card");
         var cardIndex = 0;
 
         var questions = '{{ cardList }}'
         questions = questions.replaceAll("&#39;","\"")
         var cardList = Array.from(JSON.parse(questions))
+        cardList.push("END OF DECK")
 
-        nextQuestion.addEventListener("click", function() {
+        card.addEventListener("click", function() {
             nextQuestion.textContent = cardList[cardIndex];
-            cardIndex += 1;
-            console.log(cardIndex)
+            if (cardIndex < cardList.length-1) {
+                cardIndex += 1;
+            }
         });
     </script>
 
