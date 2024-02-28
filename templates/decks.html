@@ -3,7 +3,7 @@
 {% block container %}
 
     {% for deck in mainDecks %}
-        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title, cardIndex=-1 )}}" style="text-decoration:none">
+        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}" style="text-decoration:none">
             <button class="main-deck">
                 <h3>{{ deck.title }}</h3>
             </button>

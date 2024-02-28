@@ -6,11 +6,9 @@
         <h2> {{ deckTitle }}</h2>
     </div>
     
-    <a href="{{ url_for('displayDeck', username='guest', deckTitle=deckTitle, cardIndex=cardIndex )}}">
-        <div class="card">
-            <h3>{{ question }}</h3>
-        </div>
-    </a>
+    <div class="card">
+        <h3 id="next-question"> START </h3>
+    </div>
 
 
     <a href="{{ url_for('addCard', username='guest', deckTitle=deckTitle) }}" style="text-decoration:none">
@@ -20,4 +18,20 @@
         <button class="button2">Edit</button>
     </a>
 
+    <script>
+        const nextQuestion = document.querySelector("#next-question");
+        var cardIndex = 0;
+
+        var questions = '{{ cardList }}'
+        questions = questions.replaceAll("&#39;","\"")
+        var cardList = Array.from(JSON.parse(questions))
+
+        nextQuestion.addEventListener("click", function() {
+            nextQuestion.textContent = cardList[cardIndex];
+            cardIndex += 1;
+            console.log(cardIndex)
+        });
+    </script>
+
 {% endblock %}
+
