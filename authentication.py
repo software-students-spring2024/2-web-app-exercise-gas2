@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, session, flash
-from flask_login import LoginManager, UserMixin, login_user
+from flask_login import LoginManager, UserMixin, login_user, current_user
 from db import *
 from pymongo import *
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -45,7 +45,7 @@ def auth_login():
         if user and user.verify_password(password):
             # TODO: Redirect to the appropriate page for the logged in user
             login_user(user)
-            return redirect('/')
+            return redirect('/' + user_id + '/decks')
         else:
             return render_template('login.html', invalid_login=True)
     else:
@@ -66,7 +66,7 @@ def auth_signup():
             db['users'].insert_one({"user_id": user.id, "password": user.password})
             login_user(user)
             # TODO: Redirect to the appropriate page for the logged in user
-            return redirect('/')
+            return redirect('/' + user_id + '/decks')
 
     else:
         return render_template('signup.html', username_taken=False, passwords_dont_match=False)
