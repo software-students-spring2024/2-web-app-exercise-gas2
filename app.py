@@ -39,10 +39,8 @@ def allDecks(username):
     else:
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect('/login')
-        else:
-            user = db.users.find_one({'user_id': current_user.id})
-            return render_template('decks.html', mainDecks = user['mainDecks'], personalDecks = user['personalDecks'])
-
+        user = db.users.find_one({'user_id': current_user.id})
+        return render_template('decks.html', mainDecks = user['mainDecks'], personalDecks = user['personalDecks'])
 
 @app.route("/<username>/<deckTitle>")
 def displayDeck(username, deckTitle):
@@ -53,7 +51,22 @@ def displayDeck(username, deckTitle):
         # shuffle deck
         random.shuffle(cardList)
         return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
-    return "temp"
+    else:
+        if (not current_user.is_authenticated or current_user.id != username):
+            return redirect('/login')
+
+        currentDeck = db.users.find_one({"title": deckTitle})
+        # if the deck is not found in the users deck, look for in main
+        if not currentDeck:
+            currentDeck = db.decks.find_one({"title": deckTitle})
+
+        print(currentDeck)
+
+        cardList = currentDeck['cards']
+        # shuffle deck
+        random.shuffle(cardList)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
+
 
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):

@@ -3,7 +3,7 @@
 {% block container %}
 
     {% for deck in mainDecks %}
-        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}" style="text-decoration:none">
+        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title) }}" style="text-decoration:none">
             <button class="main-deck">
                 <h3>{{ deck.title }}</h3>
             </button>
@@ -11,7 +11,7 @@
     {% endfor %}
 
     {% for deck in personalDecks %}
-        <a href="{{ url_for('home') }}" style="text-decoration:none">
+        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none">
             <button class="personal-deck">
                 <h3>{{ deck.title }}</h3>
             </button>
