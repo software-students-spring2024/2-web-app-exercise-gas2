@@ -2,6 +2,10 @@
 
 {% block container %}
 
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search decks..." onkeyup="searchDecks()">
+    </div>
+
     {% for deck in mainDecks %}
         <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}" style="text-decoration:none">
             <button class="main-deck">
