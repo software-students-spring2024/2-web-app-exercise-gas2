@@ -23,7 +23,7 @@
         <h3> + </h3>
     </button>
 
-    <form action="{{ '/' ~ username ~ '/create' }}" method="post" class="add-deck-form" style="display: none">
+    <form action="{{ url_for('createDeck', username=username) }}" method="post" class="add-deck-form" style="display: none">
         <p>x</p>
         <div>
             <label for="title">Title: </label>
