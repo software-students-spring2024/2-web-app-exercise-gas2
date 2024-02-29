@@ -39,8 +39,10 @@ def allDecks(username):
     else:
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect('/login')
-        user = db.users.find_one({'user_id': current_user.id})
-        return render_template('decks.html', mainDecks = user['mainDecks'], personalDecks = user['personalDecks'])
+        else:
+            user = db.users.find_one({'user_id': current_user.id})
+            mainDecks = db.decks.find({})
+            return render_template('decks.html', mainDecks = mainDecks, personalDecks = user['personalDecks'])
 
 @app.route("/<username>/<deckTitle>")
 def displayDeck(username, deckTitle):
