@@ -35,14 +35,14 @@ def signup():
 def allDecks(username):
     if username == "guest":
         mainDecks = db.decks.find({})
-        return render_template('decks.html', mainDecks=mainDecks)
+        return render_template('decks.html', mainDecks=mainDecks, isAuth=False)
     else:
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect('/login')
         else:
             user = db.users.find_one({'user_id': current_user.id})
             mainDecks = db.decks.find({})
-            return render_template('decks.html', mainDecks = mainDecks, personalDecks = user['personalDecks'])
+            return render_template('decks.html', username = username, isAuth=True, mainDecks = mainDecks, personalDecks = user['personalDecks'])
 
 
 @app.route("/<username>/<deckTitle>")
