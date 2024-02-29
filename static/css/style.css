@@ -32,11 +32,21 @@ h3 {
   margin-bottom: 10%; 
 }
 
-.main-deck h3,
+.main-deck h3 {
+  color: #7F5F59;
+  text-align: center;
+  font-size: 55px;
+}
 .personal-deck h3 {
   color: #FAFAFA;
   text-align: center;
   font-size: 55px;
+}
+
+.add-deck h3 {
+  color: #FAFAFA;
+  text-align: center;
+  font-size: 150px; 
 }
 
 .card {
@@ -53,7 +63,8 @@ h3 {
 }
 
 .main-deck,
-.personal-deck {
+.personal-deck,
+.add-deck {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +81,64 @@ h3 {
 }
 
 .personal-deck {
+  background: #e1948d;
+}
+
+.add-deck {
   background: #7F5F59;
+
+}
+
+.add-deck-form {
+  position: fixed;
+  top: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 90%;
+  aspect-ratio: 8 / 5;
+  padding: 10px;
+  margin-bottom: 10%; 
+  border-radius: .5rem;
+  background: #7F5F59;
+  text-align: center;
+}
+
+.add-deck-form input[type=submit] {
+  color: #63514F;
+  background: #D9D9D9;
+  text-align: center;
+  font-size: 55px; 
+  border-radius: .5rem;
+  padding: 40px;
+}
+
+.add-deck-form input[type=text] {
+  color: #63514F;
+  background: #D9D9D9;
+  text-align: center;
+  font-size: 55px; 
+  border-radius: .5rem;
+}
+
+.add-deck-form label {
+  color: #D9D9D9;
+  text-align: center;
+  font-size: 55px; 
+  border-radius: .5rem;
+}
+
+.add-deck-form p {
+  position: absolute;
+  top: .1rem;
+  left: 1rem;
+  color: #D9D9D9;
+  font-size: 55px; 
+  margin: 0;
 }
 
 .vertical-align {
