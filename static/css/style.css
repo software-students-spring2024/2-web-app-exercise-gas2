@@ -137,3 +137,19 @@ h3 {
 .signup-error, .login-error {
   font-size: 25px;
 }
+
+.search-container {
+  margin-bottom: 40px;
+}
+
+#searchInput {
+  width: 90%;
+  padding: 15px;
+  font-size: 25px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
