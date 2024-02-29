@@ -42,7 +42,7 @@ def allDecks(username):
         else:
             user = db.users.find_one({'user_id': current_user.id})
             mainDecks = db.decks.find({})
-            return render_template('decks.html', mainDecks = mainDecks, personalDecks = user['personalDecks'])
+            return render_template('decks.html', username = username, mainDecks = mainDecks, personalDecks = user['personalDecks'])
 
 
 @app.route("/<username>/<deckTitle>")
