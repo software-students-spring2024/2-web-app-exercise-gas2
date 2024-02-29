@@ -18,6 +18,7 @@
         </a>
     {% endfor %}
     
+   {% if not isGuest %} 
     <button class="add-deck">
         <h3> + </h3>
     </button>
@@ -43,5 +44,5 @@
             document.querySelector(".add-deck-form").style.display="none"
         })
     </script>
-
+    {% endif %}
 {% endblock %}
