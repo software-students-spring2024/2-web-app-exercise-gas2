@@ -72,9 +72,9 @@ def displayDeck(username, deckTitle):
 
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):
+    # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect('/login')
-    # now is authenticated
     title = request.form["title"]
     newDeck = {"title": title, "cards": []}
     db.users.update_one({"user_id": username}, {"$push": {"personalDecks": newDeck}})
@@ -83,6 +83,9 @@ def createDeck(username):
 
 @app.route("/<username>/<deckTitle>/add", methods=["POST"])
 def addCard(username, deckTitle):
+    # authenticate user
+    if (not current_user.is_authenticated or current_user.id != username):
+        return redirect('/login')
     # would need to first find user in db, but not set up yet
     deck = db.decks.find_one({"title": deckTitle})
     newCard = request.form["question"]
@@ -93,6 +96,9 @@ def addCard(username, deckTitle):
 
 @app.route("/<username>/<deckTitle>/<cardIndex>/edit", methods=["POST"])
 def editCard(username, deckTitle, cardIndex):
+    # authenticate user
+    if (not current_user.is_authenticated or current_user.id != username):
+        return redirect('/login')
     # would need to first find user in db, but not set up yet
     deck = db.decks.find_one({"title": deckTitle})
     newCard = request.form["question"]
@@ -103,6 +109,9 @@ def editCard(username, deckTitle, cardIndex):
 
 @app.route("/<username>/<deckTitle>/<cardIndex>/delete")
 def deleteCard(username, deckTitle, cardIndex):
+    # authenticate user
+    if (not current_user.is_authenticated or current_user.id != username):
+        return redirect('/login')
     # would need to first find user in db, but not set up yet
     deck = db.decks.find_one({"title": deckTitle})
     deck["cards"].pop(int(cardIndex))
@@ -112,6 +121,9 @@ def deleteCard(username, deckTitle, cardIndex):
 
 @app.route("/<username>/<deckTitle>/delete")
 def deleteDeck(username, deckTitle):
+    # authenticate user
+    if (not current_user.is_authenticated or current_user.id != username):
+        return redirect('/login')
     # would need to first find user in db, but not set up yet
     db.decks.delete_one({"title": deckTitle})
     # would redirect to template for Cards
