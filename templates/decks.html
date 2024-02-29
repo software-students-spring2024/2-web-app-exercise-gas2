@@ -23,7 +23,7 @@
             <h3> + </h3>
         </button>
 
-        <form action="{{ url_for('createDeck', username=username) }}" method="post" class="add-deck-form" style="display: none">
+        <form action="/temp/create" method="post" class="add-deck-form" style="display: none">
             <p>x</p>
             <div>
                 <label for="title">Title: </label>
@@ -45,5 +45,5 @@
             document.querySelector(".add-deck-form").style.display="none"
         })
     </script>
-
+    {% endif %}
 {% endblock %}

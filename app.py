@@ -36,6 +36,7 @@ def allDecks(username):
     if username == "guest":
         mainDecks = db.decks.find({})
         return render_template('decks.html', mainDecks=mainDecks, isAuth=False)
+        return render_template('decks.html', mainDecks=mainDecks, isAuth=False)
     else:
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect('/login')
