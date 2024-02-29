@@ -32,11 +32,21 @@ h3 {
   margin-bottom: 10%; 
 }
 
-.main-deck h3,
+.main-deck h3 {
+  color: #7F5F59;
+  text-align: center;
+  font-size: 55px;
+}
 .personal-deck h3 {
   color: #FAFAFA;
   text-align: center;
   font-size: 55px;
+}
+
+.add-deck h3 {
+  color: #FAFAFA;
+  text-align: center;
+  font-size: 150px; 
 }
 
 .card {
@@ -53,7 +63,8 @@ h3 {
 }
 
 .main-deck,
-.personal-deck {
+.personal-deck,
+.add-deck {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +81,12 @@ h3 {
 }
 
 .personal-deck {
+  background: #e1948d;
+}
+
+.add-deck {
   background: #7F5F59;
+
 }
 
 .vertical-align {
