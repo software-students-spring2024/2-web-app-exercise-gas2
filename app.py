@@ -76,7 +76,8 @@ def createDeck(username):
     title = request.form["title"]
     newDeck = {"title": title, "cards": []}
     db.users.update_one({"user_id": username}, {"$push": {"personalDecks": newDeck}})
-    # would rendirect to template for Cards
+    # would rendirect to decks
+    return redirect(url_for('allDecks', username=username))
     return "created deck"
 
 @app.route("/<username>/<deckTitle>/add", methods=["POST"])
