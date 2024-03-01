@@ -85,10 +85,11 @@ def addCard(username, deckTitle, cardIndex):
     # if (not current_user.is_authenticated or current_user.id != username):
     #     return redirect('/login')
     # would need to first find user in db, but not set up yet
-    deck = db.decks.find_one({"title": deckTitle})
-    newCard = request.form["question"]
-    deck["cards"].insert(int(cardIndex), newCard)
-    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    # deck = db.decks.find_one({"title": deckTitle})
+    # newCard = request.form["question"]
+    # deck["cards"].insert(int(cardIndex), newCard)
+    # db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    print(request.form["question"])
     # would redirect to template for Cards
     return "added card"
 

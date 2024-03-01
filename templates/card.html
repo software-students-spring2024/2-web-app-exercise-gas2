@@ -8,11 +8,15 @@
     
     <div id="card" class="card">
         <h3 id="next-question"> START </h3>
-        <textarea name="textarea" style="display: none"></textarea>
     </div>
 
     <button id="add-card-button" class="button2" >Add Card</button>
     <button id="edit-card-button" class="button2">Edit</button>
+
+    <form method="post" id="card-form" style="display:none">
+        <textarea name="question"></textarea>
+        <button class="button2">Done</button>
+    </form>
 
 
     <script>
@@ -31,9 +35,12 @@
         });
 
         const addButton = document.querySelector("#add-card-button")
-        addButton.addEventListener("click", function() {
-            document.querySelector(".card textarea").style.display="initial"
+        addButton.addEventListener("click", async function() {
             document.querySelector("#next-question").style.display="none"
+            document.querySelector("#add-card-button").style.display="none"
+            document.querySelector("#edit-card-button").style.display="none"
+            document.querySelector("#card-form").style.display="initial"
+            document.querySelector("#card-form").action="/amber/test2/0/add" 
         })
 
         const editButton = document.querySelector("#edit-card-button")

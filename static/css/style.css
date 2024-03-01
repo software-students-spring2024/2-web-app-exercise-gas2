@@ -62,7 +62,7 @@ h3 {
   margin-bottom: 10%; 
 }
 
-.card textarea {
+#card-form textarea {
   font-family: sans-serif;
   color: #e1948d;
   text-align: center;
@@ -71,6 +71,10 @@ h3 {
   padding-top: 7rem;
   padding-bottom: 7rem;
   width: 40rem;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .main-deck,
