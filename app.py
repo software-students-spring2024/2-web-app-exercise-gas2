@@ -58,7 +58,10 @@ def displayDeck(username, deckTitle):
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect(url_for('login'))
         # TODO: id is not being generated, some problem
-        currentDeck = db.users.find_one({"user_id": username, "personalDecks.title": deckTitle}, {"personalDecks.$": 1}).get("personalDecks")[0]
+        currentDeck = db.users.find_one(
+            {"user_id": username, "personalDecks.title": deckTitle}, 
+            {"personalDecks.$": 1}
+        ).get("personalDecks")[0]
         # if the deck is not found in the users deck, look for in main
         if not currentDeck:
             currentDeck = db.decks.find_one({"title": deckTitle})
@@ -85,11 +88,11 @@ def addCard(username, deckTitle):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
-    # would need to first find user in db, but not set up yet
-    deck = db.decks.find_one({"title": deckTitle})
     newCard = request.form["question"]
-    deck["cards"].append(newCard)
-    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    db.users.update_one(
+        {"user_id": username, "personalDecks.title": deckTitle},
+        {"$push": {"personalDecks.$.cards": newCard}}
+    )
     # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the added card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
