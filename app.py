@@ -79,15 +79,15 @@ def createDeck(username):
     # would rendirect to template for Cards
     return "created deck"
 
-@app.route("/<username>/<deckTitle>/add", methods=["POST"])
-def addCard(username, deckTitle):
+@app.route("/<username>/<deckTitle>/<cardIndex>/add", methods=["POST"])
+def addCard(username, deckTitle, cardIndex):
     # authenticate user
-    if (not current_user.is_authenticated or current_user.id != username):
-        return redirect('/login')
+    # if (not current_user.is_authenticated or current_user.id != username):
+    #     return redirect('/login')
     # would need to first find user in db, but not set up yet
     deck = db.decks.find_one({"title": deckTitle})
     newCard = request.form["question"]
-    deck["cards"].append(newCard)
+    deck["cards"].insert(int(cardIndex), newCard)
     db.decks.update_one({"title": deckTitle}, {"$set": deck})
     # would redirect to template for Cards
     return "added card"

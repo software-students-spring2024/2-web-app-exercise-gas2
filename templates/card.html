@@ -8,14 +8,12 @@
     
     <div id="card" class="card">
         <h3 id="next-question"> START </h3>
+        <textarea name="textarea" style="display: none"></textarea>
     </div>
 
-    <a href="{{ url_for('addCard', username='guest', deckTitle=deckTitle) }}" style="text-decoration:none">
-        <button class="button2" >Add Card</button>
-    </a>
-    <a href="{{ url_for('editCard', username='guest', deckTitle=deckTitle, cardIndex=cardIndex ) }}" style="text-decoration:none">
-        <button class="button2">Edit</button>
-    </a>
+    <button id="add-card-button" class="button2" >Add Card</button>
+    <button id="edit-card-button" class="button2">Edit</button>
+
 
     <script>
         const nextQuestion = document.querySelector("#next-question");
@@ -31,6 +29,17 @@
                 cardIndex += 1;
             }
         });
+
+        const addButton = document.querySelector("#add-card-button")
+        addButton.addEventListener("click", function() {
+            document.querySelector(".card textarea").style.display="initial"
+            document.querySelector("#next-question").style.display="none"
+        })
+
+        const editButton = document.querySelector("#edit-card-button")
+        editButton.addEventListener("click", function() {
+            console.log("cardIndex: ", cardIndex)
+        })
     </script>
 
 {% endblock %}
