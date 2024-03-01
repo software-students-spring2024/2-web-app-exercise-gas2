@@ -92,6 +92,7 @@ def addCard(username, deckTitle, cardIndex):
     # would redirect to template for Cards
     return "added card"
 
+# since shuffled, maybe should be cardQuestion instead of cardIndex?
 @app.route("/<username>/<deckTitle>/<cardIndex>/edit", methods=["POST"])
 def editCard(username, deckTitle, cardIndex):
     # authenticate user

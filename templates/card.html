@@ -55,7 +55,7 @@
             document.querySelector("#card-form").style.display="initial"
             document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
 
-            document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/edit"
+            document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
         })
     </script>
 
