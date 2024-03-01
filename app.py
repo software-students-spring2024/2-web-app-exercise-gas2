@@ -59,15 +59,9 @@ def displayDeck(username, deckTitle):
             return redirect('/login')
         # TODO: id is not being generated, some problem
         currentDeck = db.users.find_one({"user_id": username, "personalDecks.title": deckTitle}, {"personalDecks.$": 1}).get("personalDecks")[0]
-
-    
         # if the deck is not found in the users deck, look for in main
         if not currentDeck:
             currentDeck = db.decks.find_one({"title": deckTitle})
-
-        print("current deck", currentDeck)
-        print("better deck", db.decks.find_one({"title": "lalalala"}))
-
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
@@ -81,10 +75,7 @@ def createDeck(username):
         return redirect('/login')
     title = request.form["title"]
     newDeck = {"title": title, "cards": []}
- 
     db.users.update_one({"user_id": username}, {"$push": {"personalDecks": newDeck}})
-    # db.users.update_one({"user_id": username}, {"$set": {"personalDecks." + title: []}}) #attempt at changing personalDeck to a set of dictionaries
-
     # would rendirect to template for Cards
     return "created deck"
 
