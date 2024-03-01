@@ -34,13 +34,17 @@
             }
         });
 
+        const username = "{{ username }}"
+        const deckTitle = "{{ deckTitle }}"
+        
         const addButton = document.querySelector("#add-card-button")
         addButton.addEventListener("click", async function() {
             document.querySelector("#next-question").style.display="none"
             document.querySelector("#add-card-button").style.display="none"
             document.querySelector("#edit-card-button").style.display="none"
             document.querySelector("#card-form").style.display="initial"
-            document.querySelector("#card-form").action="/amber/test2/0/add" 
+
+            document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
         })
 
         const editButton = document.querySelector("#edit-card-button")
