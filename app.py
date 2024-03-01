@@ -37,12 +37,12 @@ def allDecks(username):
         mainDecks = db.decks.find({})
         return render_template('decks.html', mainDecks=mainDecks, isAuth=False)
     else:
+        # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect('/login')
-        else:
-            user = db.users.find_one({'user_id': current_user.id})
-            mainDecks = db.decks.find({})
-            return render_template('decks.html', username=username, isAuth=True, mainDecks=mainDecks, personalDecks=user['personalDecks'])
+        user = db.users.find_one({'user_id': current_user.id})
+        mainDecks = db.decks.find({})
+        return render_template('decks.html', username=username, isAuth=True, mainDecks=mainDecks, personalDecks=user['personalDecks'])
 
 @app.route("/<username>/<deckTitle>")
 def displayDeck(username, deckTitle):
@@ -54,22 +54,26 @@ def displayDeck(username, deckTitle):
         random.shuffle(cardList)
         return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
     else:
+        # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
             return redirect('/login')
+        # TODO: id is not being generated, some problem
+        currentDeck = db.users.find_one({"user_id": username, "personalDecks.title": deckTitle}, {"personalDecks.$": 1}).get("personalDecks")[0]
 
-        currentDeck = db.users.find_one({"title": deckTitle})
+    
         # if the deck is not found in the users deck, look for in main
         if not currentDeck:
             currentDeck = db.decks.find_one({"title": deckTitle})
 
-        print(currentDeck)
+        print("current deck", currentDeck)
+        print("better deck", db.decks.find_one({"title": "lalalala"}))
 
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
         return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
 
-
+# TODO: change createDeck to addDeck for naming consistency
 @app.route("/<username>/create", methods=["POST"])
 def createDeck(username):
     # authenticate user
@@ -77,7 +81,10 @@ def createDeck(username):
         return redirect('/login')
     title = request.form["title"]
     newDeck = {"title": title, "cards": []}
+ 
     db.users.update_one({"user_id": username}, {"$push": {"personalDecks": newDeck}})
+    # db.users.update_one({"user_id": username}, {"$set": {"personalDecks." + title: []}}) #attempt at changing personalDeck to a set of dictionaries
+
     # would rendirect to template for Cards
     return "created deck"
 
