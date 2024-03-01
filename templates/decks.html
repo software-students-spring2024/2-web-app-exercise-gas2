@@ -2,8 +2,12 @@
 
 {% block container %}
 
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search decks...">
+    </div>
+
     {% for deck in mainDecks %}
-        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title) }}" style="text-decoration:none">
+        <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}" style="text-decoration:none" class="deck-link">
             <button class="main-deck">
                 <h3>{{ deck.title }}</h3>
             </button>
@@ -11,17 +15,34 @@
     {% endfor %}
 
     {% for deck in personalDecks %}
-        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none">
+        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">>
             <button class="personal-deck">
                 <h3>{{ deck.title }}</h3>
             </button>
         </a>
     {% endfor %}
-    
-    {% if isAuth %}
-        <button class="add-deck">
-            <h3> + </h3>
-        </button>
+
+    <script>
+        const searchBar = document.getElementById("searchBar");
+        const deckLinks = document.querySelectorAll(".deck-link");
+
+        searchBar.addEventListener("input", function() {
+            const searchTerm = searchBar.value.toLowerCase();
+            deckLinks.forEach(function(link) {
+                const deckTitle = link.querySelector("h3").textContent.toLowerCase();
+                if (deckTitle.includes(searchTerm)) {
+                    link.style.display = "block";
+                } else {
+                    link.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+    {% if isAuth %} 
+    <button class="add-deck">
+        <h3> + </h3>
+    </button>
 
         <form action="{{ url_for('createDeck', username=username) }}" method="post" class="add-deck-form" style="display: none">
             <p>x</p>
@@ -47,3 +68,4 @@
     {% endif %}
 
 {% endblock %}
+
