@@ -113,15 +113,15 @@ def editCard(username, deckTitle, cardIndex):
     # TODO: is there a way to not have to refresh the page and show the edited card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
-@app.route("/<username>/<deckTitle>/<cardIndex>/delete")
+@app.route("/<username>/<deckTitle>/<cardIndex>/delete", methods=["POST"])
 def deleteCard(username, deckTitle, cardIndex):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
-    newCard = request.form["question"]
+    cardQuestion = request.form["question"]
     db.users.update_one(
         {"user_id": username, "personalDecks.title": deckTitle},
-        {"$pull": {"personalDecks.$.cards": newCard}}
+        {"$pull": {"personalDecks.$.cards": cardQuestion}}
     )
     # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the previous card 

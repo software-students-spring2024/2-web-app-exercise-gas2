@@ -21,6 +21,10 @@
     <button id="add-card-button" class="button2" >Add Card</button>
     <button id="edit-card-button" class="button2" style="display: none">Edit</button>
 
+    <form method="post" id="delete-form">
+        <input type="hidden" name="question" id="delete-form-question" value=""></input>
+        <button id="delete-card-button" class="button2" style="display: none">Delete Card</button>
+    </form>
 
     <form method="post" id="card-form" style="display: none">
         <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="120px" height="120px">
@@ -41,11 +45,12 @@
         const isAuth = ("{{ isAuth }}" == "True")
 
         var cardIndex = -1;
-        var questions = '{{ cardList }}'
+        var questions = '{{ cardList | safe}}'
 
-        questions = questions.replaceAll("&#39;","\"")
-        questions = questions.replaceAll("\r","")
-        questions = questions.replaceAll("\n","")
+        // Handle special characters
+        questions = questions.replaceAll("&#39;","'")
+        questions = questions.replaceAll("&#34;","\"")
+
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
 
@@ -63,6 +68,7 @@
                 if (isAuth) {
                     document.querySelector("#add-card-button").style.display="initial"
                     document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#delete-card-button").style.display="none"
                 }
             }
         }
@@ -74,6 +80,7 @@
             if (isAuth && cardIndex == -1) {
                 document.querySelector("#add-card-button").style.display="initial"
                 document.querySelector("#edit-card-button").style.display="initial"
+                document.querySelector("#delete-card-button").style.display="initial"
             }
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1;
@@ -81,6 +88,7 @@
                 if (isAuth && cardIndex == cardList.length-1) {
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#delete-card-button").style.display="none"
                 }
             }
         }
@@ -99,6 +107,7 @@
                     document.querySelector("#next-question").style.display="none"
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#delete-card-button").style.display="none"
                     document.querySelector("#card-form").style.display="initial"
 
                     document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
@@ -111,6 +120,7 @@
                     document.querySelector("#next-question").style.display="none"
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#delete-card-button").style.display="none"
                     document.querySelector("#card-form").style.display="initial"
                     document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
 
@@ -124,7 +134,18 @@
                     document.querySelector("#next-question").style.display="initial"
                     document.querySelector("#add-card-button").style.display="initial"
                     document.querySelector("#edit-card-button").style.display="initial"
+                    document.querySelector("#delete-card-button").style.display="initial"
                     document.querySelector("#card-form").style.display="none"
+                })
+            }
+
+            const deleteButton = document.querySelector("#delete-card-button")
+            if (deleteButton) {
+                deleteButton.addEventListener("click", async function() {
+                    const question= document.querySelector("#next-question").textContent
+                    document.querySelector("#delete-form-question").value = question
+                    console.log(document.querySelector("#delete-form-question").value)
+                    document.querySelector("#delete-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/delete"
                 })
             }
         }
