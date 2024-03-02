@@ -3,6 +3,7 @@ from flask_login import current_user
 from authentication import *
 from db import * 
 import random
+import json
 
 app = Flask(__name__)
 login_manager.init_app(app)
@@ -56,7 +57,7 @@ def displayDeck(username, deckTitle):
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
-        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList, isAuth=False)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=json.dumps(cardList), isAuth=False)
     else:
         # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
@@ -72,7 +73,7 @@ def displayDeck(username, deckTitle):
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
-        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList, isAuth=True)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=json.dumps(cardList), isAuth=True)
 
 # TODO: change createDeck to addDeck for naming consistency
 @app.route("/<username>/create", methods=["POST"])
