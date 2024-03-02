@@ -35,19 +35,16 @@
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
 
-        card.addEventListener("click", function() {
+        // event listener for both card click and next button click
+        function nextCard() {
             nextQuestion.textContent = cardList[cardIndex];
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1;
             }
-        });
+        }
 
-        next.addEventListener("click", function() {
-            nextQuestion.textContent = cardList[cardIndex];
-            if (cardIndex < cardList.length-1) {
-                cardIndex += 1;
-            }
-        });
+        card.addEventListener("click", nextCard);
+        next.addEventListener("click", nextCard);
 
     </script>
 
