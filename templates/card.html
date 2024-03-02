@@ -90,7 +90,8 @@
         
         if (isAuth) {
             const username = "{{ username }}"
-            const deckTitle = "{{ deckTitle }}"
+            let deckTitle = "{{ deckTitle }}"
+            deckTitle = deckTitle.replaceAll("&#39;","'")
 
             const addButton = document.querySelector("#add-card-button")
             if (addButton) {
@@ -107,14 +108,14 @@
             const editButton = document.querySelector("#edit-card-button")
             if (editButton){
                 editButton.addEventListener("click", function() {
-                document.querySelector("#next-question").style.display="none"
-                document.querySelector("#add-card-button").style.display="none"
-                document.querySelector("#edit-card-button").style.display="none"
-                document.querySelector("#card-form").style.display="initial"
-                document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
+                    document.querySelector("#next-question").style.display="none"
+                    document.querySelector("#add-card-button").style.display="none"
+                    document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#card-form").style.display="initial"
+                    document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
 
-                document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
-            })
+                    document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
+                })
             }
 
             const closeIcon = document.querySelector("#close-icon")
