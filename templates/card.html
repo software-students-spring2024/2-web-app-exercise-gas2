@@ -38,6 +38,7 @@
         const card = document.querySelector("#card");
         const prev = document.querySelector("#prevButton");
         const next = document.querySelector("#nextButton");
+        const isAuth = ("{{ isAuth }}" == "True")
 
         var cardIndex = -1;
         var questions = '{{ cardList }}'
@@ -51,12 +52,16 @@
             if (cardIndex > 0) {
                 cardIndex -= 1;
                 nextQuestion.textContent = cardList[cardIndex];
-                document.querySelector("#add-card-button").style.display="initial"
-                document.querySelector("#edit-card-button").style.display="initial"
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="initial"
+                }
             } else {
                 nextQuestion.textContent = "START";
-                document.querySelector("#add-card-button").style.display="initial"
-                document.querySelector("#edit-card-button").style.display="none"
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="none"
+                }
             }
         }
 
@@ -64,14 +69,14 @@
 
         // event listener for both card click and next button click
         function nextCard() {
-            if (cardIndex == -1) {
+            if (isAuth && cardIndex == -1) {
                 document.querySelector("#add-card-button").style.display="initial"
                 document.querySelector("#edit-card-button").style.display="initial"
             }
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1;
                 nextQuestion.textContent = cardList[cardIndex];
-                if (cardIndex == cardList.length-1) {
+                if (isAuth && cardIndex == cardList.length-1) {
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
                 }
@@ -80,38 +85,46 @@
 
         card.addEventListener("click", nextCard);
         next.addEventListener("click", nextCard);
+        
+        if (isAuth) {
+            const username = "{{ username }}"
+            const deckTitle = "{{ deckTitle }}"
 
-        const username = "{{ username }}"
-        const deckTitle = "{{ deckTitle }}"
+            const addButton = document.querySelector("#add-card-button")
+            if (addButton) {
+                addButton.addEventListener("click", async function() {
+                document.querySelector("#next-question").style.display="none"
+                document.querySelector("#add-card-button").style.display="none"
+                document.querySelector("#edit-card-button").style.display="none"
+                document.querySelector("#card-form").style.display="initial"
 
-        const addButton = document.querySelector("#add-card-button")
-        addButton.addEventListener("click", async function() {
-            document.querySelector("#next-question").style.display="none"
-            document.querySelector("#add-card-button").style.display="none"
-            document.querySelector("#edit-card-button").style.display="none"
-            document.querySelector("#card-form").style.display="initial"
+                document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
+            })
+            }
 
-            document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
-        })
+            const editButton = document.querySelector("#edit-card-button")
+            if (editButton){
+                editButton.addEventListener("click", function() {
+                document.querySelector("#next-question").style.display="none"
+                document.querySelector("#add-card-button").style.display="none"
+                document.querySelector("#edit-card-button").style.display="none"
+                document.querySelector("#card-form").style.display="initial"
+                document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
 
-        const editButton = document.querySelector("#edit-card-button")
-        editButton.addEventListener("click", function() {
-            document.querySelector("#next-question").style.display="none"
-            document.querySelector("#add-card-button").style.display="none"
-            document.querySelector("#edit-card-button").style.display="none"
-            document.querySelector("#card-form").style.display="initial"
-            document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
+                document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
+            })
+            }
 
-            document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
-        })
-
-        const closeIcon = document.querySelector("#close-icon")
-        closeIcon.addEventListener("click", function() {
-            document.querySelector("#next-question").style.display="initial"
-            document.querySelector("#add-card-button").style.display="initial"
-            document.querySelector("#edit-card-button").style.display="initial"
-            document.querySelector("#card-form").style.display="none"
-        })
+            const closeIcon = document.querySelector("#close-icon")
+            if (closeIcon) {
+                closeIcon.addEventListener("click", function() {
+                    document.querySelector("#next-question").style.display="initial"
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="initial"
+                    document.querySelector("#card-form").style.display="none"
+                })
+            }
+        }
     </script>
 
 {% endblock %}
