@@ -50,7 +50,8 @@
         var cardIndex = -1;
         var questions = '{{ cardList }}'
 
-        questions = questions.replaceAll("&#39;","\"")
+        questions = questions.replaceAll("&#39;","'")
+        questions = questions.replaceAll("&#34;","\"")
         questions = questions.replaceAll("\r","")
         questions = questions.replaceAll("\n","")
 
