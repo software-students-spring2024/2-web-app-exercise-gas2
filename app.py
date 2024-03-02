@@ -117,10 +117,20 @@ def deleteCard(username, deckTitle, cardIndex):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
-    # would need to first find user in db, but not set up yet
-    deck = db.decks.find_one({"title": deckTitle})
-    deck["cards"].pop(int(cardIndex))
-    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    
+    db.users.update_one(
+        {"user_id": username, "personalDecks.title": deckTitle},
+        {"$pull": {"personalDecks.$.cards": "question"}}
+    )
+
+# db.users.update_one(
+#     {"user_id": username, "personalDecks.title": deckTitle},
+#     {"$pull": {"personalDecks.$.cards": question}}
+# )
+# # would need to first find user in db, but not set up yet
+# deck = db.decks.find_one({"title": deckTitle})
+# deck["cards"].pop(int(cardIndex))
+# db.decks.update_one({"title": deckTitle}, {"$set": deck})
     # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the previous card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
