@@ -45,11 +45,11 @@
         const isAuth = ("{{ isAuth }}" == "True")
 
         var cardIndex = -1;
-        var questions = '{{ cardList | safe}}'
+        var questions = '{{ cardList }}'
 
-        // Handle special characters
-        questions = questions.replaceAll("&#39;","'")
-        questions = questions.replaceAll("&#34;","\"")
+        questions = questions.replaceAll("&#39;","\"")
+        questions = questions.replaceAll("\r","")
+        questions = questions.replaceAll("\n","")
 
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
@@ -62,6 +62,7 @@
                 if (isAuth) {
                     document.querySelector("#add-card-button").style.display="initial"
                     document.querySelector("#edit-card-button").style.display="initial"
+                    document.querySelector("#delete-card-button").style.display="initial"
                 }
             } else {
                 nextQuestion.textContent = "START";

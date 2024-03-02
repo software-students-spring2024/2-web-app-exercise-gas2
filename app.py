@@ -123,7 +123,6 @@ def deleteCard(username, deckTitle, cardIndex):
         {"user_id": username, "personalDecks.title": deckTitle},
         {"$pull": {"personalDecks.$.cards": cardQuestion}}
     )
-    # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the previous card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
