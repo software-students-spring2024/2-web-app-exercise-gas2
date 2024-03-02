@@ -15,11 +15,11 @@ app.secret_key = os.getenv("SECRET_KEY")
 def home():
     if request.method == 'POST':
         if 'login' in request.form:
-            return redirect('/login') 
+            return redirect(url_for('login')) 
         elif 'sign-up' in request.form:
-            return redirect('/signup')
+            return redirect(url_for('signup'))
         elif 'play-as-guest' in request.form:
-            return redirect('/guest/decks')
+            return redirect(url_for('allDecks', username='guest'))
     return render_template('start.html')
 
 # Handle authentication related stuff in authentication.py file
@@ -39,7 +39,7 @@ def allDecks(username):
     else:
         # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
-            return redirect('/login')
+            return redirect(url_for('login'))
         user = db.users.find_one({'user_id': current_user.id})
         mainDecks = db.decks.find({})
         return render_template('decks.html', username=username, isAuth=True, mainDecks=mainDecks, personalDecks=user['personalDecks'])
@@ -56,9 +56,12 @@ def displayDeck(username, deckTitle):
     else:
         # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
-            return redirect('/login')
+            return redirect(url_for('login'))
         # TODO: id is not being generated, some problem
-        currentDeck = db.users.find_one({"user_id": username, "personalDecks.title": deckTitle}, {"personalDecks.$": 1}).get("personalDecks")[0]
+        currentDeck = db.users.find_one(
+            {"user_id": username, "personalDecks.title": deckTitle}, 
+            {"personalDecks.$": 1}
+        ).get("personalDecks")[0]
         # if the deck is not found in the users deck, look for in main
         if not currentDeck:
             currentDeck = db.decks.find_one({"title": deckTitle})
@@ -72,60 +75,66 @@ def displayDeck(username, deckTitle):
 def createDeck(username):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
-        return redirect('/login')
+        return redirect(url_for('login'))
     title = request.form["title"]
     newDeck = {"title": title, "cards": []}
     db.users.update_one({"user_id": username}, {"$push": {"personalDecks": newDeck}})
-    # would rendirect to template for Cards
-    return "created deck"
+    # would rendirect to decks
+    # TODO: is there a way to not have to refresh the page and add the new deck 
+    return redirect(url_for('allDecks', username=username))
 
 @app.route("/<username>/<deckTitle>/add", methods=["POST"])
 def addCard(username, deckTitle):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
-        return redirect('/login')
-    # would need to first find user in db, but not set up yet
-    deck = db.decks.find_one({"title": deckTitle})
+        return redirect(url_for('login'))
     newCard = request.form["question"]
-    deck["cards"].append(newCard)
-    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    db.users.update_one(
+        {"user_id": username, "personalDecks.title": deckTitle},
+        {"$push": {"personalDecks.$.cards": newCard}}
+    )
     # would redirect to template for Cards
-    return "added card"
+    # TODO: is there a way to not have to refresh the page and show the added card 
+    return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
 @app.route("/<username>/<deckTitle>/<cardIndex>/edit", methods=["POST"])
 def editCard(username, deckTitle, cardIndex):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
-        return redirect('/login')
-    # would need to first find user in db, but not set up yet
-    deck = db.decks.find_one({"title": deckTitle})
+        return redirect(url_for('login'))
     newCard = request.form["question"]
-    deck["cards"][int(cardIndex)] = newCard
-    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+    db.users.update_one(
+        {"user_id": username, "personalDecks.title": deckTitle},
+        {"$set": {"personalDecks.$[deck].cards.$[card]": newCard}},
+        array_filters=[{"deck.title": deckTitle}, {"card": newCard}]
+    )
     # would redirect to template for Cards
-    return "edited card"
+    # TODO: is there a way to not have to refresh the page and show the edited card 
+    return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
 @app.route("/<username>/<deckTitle>/<cardIndex>/delete")
 def deleteCard(username, deckTitle, cardIndex):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
-        return redirect('/login')
-    # would need to first find user in db, but not set up yet
-    deck = db.decks.find_one({"title": deckTitle})
-    deck["cards"].pop(int(cardIndex))
-    db.decks.update_one({"title": deckTitle}, {"$set": deck})
+        return redirect(url_for('login'))
+    newCard = request.form["question"]
+    db.users.update_one(
+        {"user_id": username, "personalDecks.title": deckTitle},
+        {"$pull": {"personalDecks.$.cards": newCard}}
+    )
     # would redirect to template for Cards
-    return "deleted card"
+    # TODO: is there a way to not have to refresh the page and show the previous card 
+    return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
 @app.route("/<username>/<deckTitle>/delete")
 def deleteDeck(username, deckTitle):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
-        return redirect('/login')
-    # would need to first find user in db, but not set up yet
-    db.decks.delete_one({"title": deckTitle})
-    # would redirect to template for Cards
-    return "deleted deck"
+        return redirect(url_for('login'))
+    db.users.update_one({"user_id": username}, {"$pull": {"personalDecks": {"title": deckTitle}}})
+    # would rendirect to decks
+    # TODO: is there a way to not have to refresh the page when deleting deck
+    return redirect(url_for('allDecks', username=username))
 
 # run the app
 if __name__ == "__main__":
