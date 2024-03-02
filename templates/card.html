@@ -25,18 +25,30 @@
 
     <script>
         const nextQuestion = document.querySelector("#next-question");
-        const card = document.querySelector("#card-question");
+        const card = document.querySelector("#card");
+        const next = document.querySelector("#nextButton");
+
         var cardIndex = 0;
         var questions = '{{ cardList }}'
+
         questions = questions.replaceAll("&#39;","\"")
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
+
         card.addEventListener("click", function() {
             nextQuestion.textContent = cardList[cardIndex];
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1;
             }
         });
+
+        next.addEventListener("click", function() {
+            nextQuestion.textContent = cardList[cardIndex];
+            if (cardIndex < cardList.length-1) {
+                cardIndex += 1;
+            }
+        });
+
     </script>
 
 {% endblock %}
