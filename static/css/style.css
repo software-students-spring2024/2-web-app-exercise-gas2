@@ -236,3 +236,10 @@ h3 {
   align-items: center;
   margin: auto;
 }
+
+#close-icon {
+  position: absolute;
+  top: 35%;
+  left: 13%;
+  transform: translate(-50%, -50%);
+}

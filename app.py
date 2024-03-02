@@ -79,6 +79,7 @@ def createDeck(username):
     # would rendirect to template for Cards
     return "created deck"
 
+# since shuffled, maybe should be cardQuestion instead of cardIndex?
 @app.route("/<username>/<deckTitle>/<cardIndex>/add", methods=["POST"])
 def addCard(username, deckTitle, cardIndex):
     # authenticate user
@@ -92,7 +93,6 @@ def addCard(username, deckTitle, cardIndex):
     # would redirect to template for Cards
     return "added card"
 
-# since shuffled, maybe should be cardQuestion instead of cardIndex?
 @app.route("/<username>/<deckTitle>/<cardIndex>/edit", methods=["POST"])
 def editCard(username, deckTitle, cardIndex):
     # authenticate user
