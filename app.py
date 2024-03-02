@@ -105,8 +105,8 @@ def editCard(username, deckTitle, cardIndex):
     newCard = request.form["question"]
     db.users.update_one(
         {"user_id": username, "personalDecks.title": deckTitle},
-        {"$set": {"personalDecks.$[deck].cards.{0}".format(cardIndex): newCard}},
-        array_filters=[{"deck.title": deckTitle}]
+        {"$set": {"personalDecks.$[deck].cards.$[card]": newCard}},
+        array_filters=[{"deck.title": deckTitle}, {"card": newCard}]
     )
     # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the edited card 
@@ -131,8 +131,7 @@ def deleteDeck(username, deckTitle):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
-    # would need to first find user in db, but not set up yet
-    db.decks.delete_one({"title": deckTitle})
+    db.users.update_one({"user_id": username}, {"$pull": {"personalDecks": {"title": deckTitle}}})
     # would rendirect to decks
     # TODO: is there a way to not have to refresh the page when deleting deck
     return redirect(url_for('allDecks', username=username))
