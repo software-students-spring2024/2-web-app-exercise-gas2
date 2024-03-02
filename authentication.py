@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, session, flash
-from flask_login import LoginManager, UserMixin, login_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user
 from db import *
 from pymongo import *
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -71,5 +71,7 @@ def auth_signup():
     else:
         return render_template('signup.html', username_taken=False, passwords_dont_match=False)
 
-
+def auth_logout():
+    logout_user()
+    return redirect('/')
 
