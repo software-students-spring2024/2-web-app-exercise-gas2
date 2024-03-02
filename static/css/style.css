@@ -73,19 +73,24 @@ p a{
   margin-bottom: 10%; 
 }
 
-#card-form textarea {
-  font-family: sans-serif;
-  color: #e1948d;
-  text-align: center;
-  font-size: 55px;
-  text-transform: uppercase;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-  width: 40rem;
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.card-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 90%;
+  aspect-ratio: 8 / 5;
+  border-radius: 7rem;
+  background: #fafafa;
+  padding: 10px;
+}
+
+.question-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 10%; 
 }
 
 .main-deck,
@@ -208,6 +213,20 @@ p a{
   font-size: 50px;
 }
 
+.card-button {
+  padding: 20px;
+  background-color: #5e4d47;
+  border: 1px solid #5e4d47;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #FAFAFA;
+  font-size: 75px;
+  padding: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .user-input {
   width: 100%;
   height: 20%;
@@ -252,5 +271,20 @@ p a{
   position: absolute;
   top: 35%;
   left: 13%;
+  transform: translate(-50%, -50%);
+}
+
+#card-form textarea {
+  font-family: sans-serif;
+  color: #e1948d;
+  text-align: center;
+  font-size: 55px;
+  text-transform: uppercase;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  width: 40rem;
+  position: absolute;
+  top: 48%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
