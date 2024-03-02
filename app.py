@@ -56,7 +56,6 @@ def displayDeck(username, deckTitle):
         currentDeck = db.decks.find_one({"title": deckTitle})
         cardList = currentDeck['cards']
         # shuffle deck
-        print(type(cardList))
         random.shuffle(cardList)
         return render_template('card.html', deckTitle=deckTitle, username=username, cardList=json.dumps(cardList), isAuth=False)
     else:
@@ -72,7 +71,6 @@ def displayDeck(username, deckTitle):
         if not currentDeck:
             currentDeck = db.decks.find_one({"title": deckTitle})
         cardList = currentDeck['cards']
-        print(type(cardList))
         # shuffle deck
         random.shuffle(cardList)
         return render_template('card.html', deckTitle=deckTitle, username=username, cardList=json.dumps(cardList), isAuth=True)
