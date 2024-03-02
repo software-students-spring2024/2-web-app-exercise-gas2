@@ -10,6 +10,9 @@
         <h3 id="next-question"> START </h3>
     </div>
 
+
+    {% if isAuth %}
+
     <button id="add-card-button" class="button2" >Add Card</button>
     <button id="edit-card-button" class="button2">Edit</button>
 
@@ -22,6 +25,7 @@
         <button class="button2">Done</button>
     </form>
 
+    {% endif %}
 
     <script>
         const nextQuestion = document.querySelector("#next-question");

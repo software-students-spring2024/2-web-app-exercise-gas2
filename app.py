@@ -52,7 +52,7 @@ def displayDeck(username, deckTitle):
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
-        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList, isAuth=False)
     else:
         # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
@@ -65,7 +65,7 @@ def displayDeck(username, deckTitle):
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
-        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList, isAuth=True)
 
 # TODO: change createDeck to addDeck for naming consistency
 @app.route("/<username>/create", methods=["POST"])
