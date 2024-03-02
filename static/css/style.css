@@ -22,6 +22,17 @@ h3 {
   font-size: 55px;
 }
 
+p {
+  color: #e1948d;
+  text-align: center;
+  font-size: 25px;
+}
+
+p a{
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 .box {
   display: flex;
   justify-content: center;
