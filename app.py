@@ -31,6 +31,10 @@ def login():
 def signup():
     return auth_signup()
 
+@app.route('/logout', methods=["GET", "POST"])
+def logout():
+    return auth_logout()
+
 @app.route("/<username>/decks")
 def allDecks(username):
     if username == "guest":
