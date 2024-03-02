@@ -8,17 +8,17 @@
 
     {% for deck in mainDecks %}
         <a href="{{ url_for('displayDeck', username='guest', deckTitle=deck.title )}}" style="text-decoration:none" class="deck-link">
-            <button class="main-deck">
+            <div class="main-deck">
                 <h3>{{ deck.title }}</h3>
-            </button>
+            </div>
         </a>
     {% endfor %}
 
     {% for deck in personalDecks %}
-        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">>
-            <button class="personal-deck">
+        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
+            <div class="personal-deck">
                 <h3>{{ deck.title }}</h3>
-            </button>
+            </div>
         </a>
     {% endfor %}
 
@@ -29,7 +29,7 @@
         searchBar.addEventListener("input", function() {
             const searchTerm = searchBar.value.toLowerCase();
             deckLinks.forEach(function(link) {
-                const deckTitle = link.querySelector("h3").textContent.toLowerCase();
+                const deckTitle = link.querySelector(".deck-title").textContent.toLowerCase();
                 if (deckTitle.includes(searchTerm)) {
                     link.style.display = "block";
                 } else {
@@ -40,29 +40,27 @@
     </script>
 
     {% if isAuth %} 
-    <button class="add-deck">
-        <h3> + </h3>
-    </button>
 
-        <form action="{{ url_for('createDeck', username=username) }}" method="post" class="add-deck-form" style="display: none">
-            <p>x</p>
-            <div>
-                <label for="title">Title: </label>
-                <input type="text" name="title" required>
-            </div>
-            <div>
-                <input type="submit" name="create" value="CREATE DECK" />
+        <form action="{{ url_for('createDeck', username=username) }}" method="post" id="add-deck-form" class="personal-deck" style="display: none">
+            <div class="vertical-align">
+                <p>CANCEL</p>
+                <input type="text" name="title" placeholder="Type..." required>
+                <input class="user-input" type="submit" name="create" value="CREATE DECK" />
             </div>
         </form>
+        
+        <div class="add-deck">
+            <h3> + </h3>
+        </div>
 
         <script>
             const addDeck = document.querySelector(".add-deck")
             addDeck.addEventListener("click", function() {
-                document.querySelector(".add-deck-form").style.display="flex"
+                document.querySelector("#add-deck-form").style.display="flex"
             })
-            const exitAddDeck = document.querySelector(".add-deck-form p")
+            const exitAddDeck = document.querySelector("#add-deck-form p")
             exitAddDeck.addEventListener("click", function() {
-                document.querySelector(".add-deck-form").style.display="none"
+                document.querySelector("#add-deck-form").style.display="none"
             })
         </script>
     {% endif %}
