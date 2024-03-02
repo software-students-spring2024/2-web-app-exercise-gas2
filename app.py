@@ -127,13 +127,12 @@ def deleteCard(username, deckTitle, cardIndex):
     # TODO: is there a way to not have to refresh the page and show the previous card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
-@app.route("/<username>/<deckTitle>/delete")
+@app.route("/<username>/<deckTitle>/delete", methods=['GET', 'POST'])
 def deleteDeck(username, deckTitle):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
     db.users.update_one({"user_id": username}, {"$pull": {"personalDecks": {"title": deckTitle}}})
-    # would rendirect to decks
     # TODO: is there a way to not have to refresh the page when deleting deck
     return redirect(url_for('allDecks', username=username))
 

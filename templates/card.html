@@ -16,11 +16,11 @@
         <button id="nextButton" class="card-button">&#8250;</button>
     </div>
 
-
     {% if isAuth %}
 
     <button id="add-card-button" class="button2" >Add Card</button>
     <button id="edit-card-button" class="button2" style="display: none">Edit</button>
+
 
     <form method="post" id="card-form" style="display: none">
         <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="120px" height="120px">
@@ -44,6 +44,8 @@
         var questions = '{{ cardList }}'
 
         questions = questions.replaceAll("&#39;","\"")
+        questions = questions.replaceAll("\r","")
+        questions = questions.replaceAll("\n","")
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
 
@@ -93,13 +95,13 @@
             const addButton = document.querySelector("#add-card-button")
             if (addButton) {
                 addButton.addEventListener("click", async function() {
-                document.querySelector("#next-question").style.display="none"
-                document.querySelector("#add-card-button").style.display="none"
-                document.querySelector("#edit-card-button").style.display="none"
-                document.querySelector("#card-form").style.display="initial"
+                    document.querySelector("#next-question").style.display="none"
+                    document.querySelector("#add-card-button").style.display="none"
+                    document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#card-form").style.display="initial"
 
-                document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
-            })
+                    document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
+                })
             }
 
             const editButton = document.querySelector("#edit-card-button")

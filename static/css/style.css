@@ -54,6 +54,10 @@ p a{
   font-size: 55px;
 }
 
+.delete-deck, .delete-card {
+  font-size: 40px;
+}
+
 .add-deck h3 {
   color: #FAFAFA;
   text-align: center;
