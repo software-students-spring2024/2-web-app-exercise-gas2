@@ -5,9 +5,15 @@
     <div class="box">
         <h2> {{ deckTitle }}</h2>
     </div>
-    
-    <div id="card" class="card">
-        <h3 id="next-question"> START </h3>
+
+    <div class="question-box">
+        <button id="prevButton" class="card-button">&#8249;</button>
+
+        <div id="card" class="card-question">
+            <h3 id="next-question"> START </h3>
+        </div>
+        
+        <button id="nextButton" class="card-button">&#8250;</button>
     </div>
 
     <a href="{{ url_for('addCard', username=username, deckTitle=deckTitle) }}" style="text-decoration:none">
@@ -20,17 +26,39 @@
     <script>
         const nextQuestion = document.querySelector("#next-question");
         const card = document.querySelector("#card");
-        var cardIndex = 0;
+        const prev = document.querySelector("#prevButton");
+        const next = document.querySelector("#nextButton");
+
+        var cardIndex = -1;
         var questions = '{{ cardList }}'
+
         questions = questions.replaceAll("&#39;","\"")
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
-        card.addEventListener("click", function() {
-            nextQuestion.textContent = cardList[cardIndex];
+
+        // event listener for prev button click
+        function prevCard() {
+            if (cardIndex > 0) {
+                cardIndex -= 1;
+                nextQuestion.textContent = cardList[cardIndex];
+            } else {
+                nextQuestion.textContent = "START";
+            }
+        }
+
+        prev.addEventListener("click", prevCard);
+
+        // event listener for both card click and next button click
+        function nextCard() {
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1;
+                nextQuestion.textContent = cardList[cardIndex];
             }
-        });
+        }
+
+        card.addEventListener("click", nextCard);
+        next.addEventListener("click", nextCard);
+
     </script>
 
 {% endblock %}
