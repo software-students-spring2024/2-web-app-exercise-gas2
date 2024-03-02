@@ -26,20 +26,33 @@
     <script>
         const nextQuestion = document.querySelector("#next-question");
         const card = document.querySelector("#card");
+        const prev = document.querySelector("#prevButton");
         const next = document.querySelector("#nextButton");
 
-        var cardIndex = 0;
+        var cardIndex = -1;
         var questions = '{{ cardList }}'
 
         questions = questions.replaceAll("&#39;","\"")
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
 
+        // event listener for prev button click
+        function prevCard() {
+            if (cardIndex > 0) {
+                cardIndex -= 1;
+                nextQuestion.textContent = cardList[cardIndex];
+            } else {
+                nextQuestion.textContent = "START";
+            }
+        }
+
+        prev.addEventListener("click", prevCard);
+
         // event listener for both card click and next button click
         function nextCard() {
-            nextQuestion.textContent = cardList[cardIndex];
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1;
+                nextQuestion.textContent = cardList[cardIndex];
             }
         }
 
