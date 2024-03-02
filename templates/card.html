@@ -5,7 +5,7 @@
     <div class="box">
         <h2> {{ deckTitle }}</h2>
     </div>
-    
+
     <div class="question-box">
         <button id="prevButton" class="card-button">&#8249;</button>
 
@@ -64,7 +64,10 @@
                 cardIndex += 1;
                 nextQuestion.textContent = cardList[cardIndex];
             }
-        });
+        }
+
+        card.addEventListener("click", nextCard);
+        next.addEventListener("click", nextCard);
 
         const username = "{{ username }}"
         const deckTitle = "{{ deckTitle }}"
