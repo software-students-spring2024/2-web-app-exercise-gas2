@@ -10,10 +10,10 @@
         <h3 id="next-question"> START </h3>
     </div>
 
-    <a href="{{ url_for('addCard', username='guest', deckTitle=deckTitle) }}" style="text-decoration:none">
+    <a href="{{ url_for('addCard', username=username, deckTitle=deckTitle) }}" style="text-decoration:none">
         <button class="button2" >Add Card</button>
     </a>
-    <a href="{{ url_for('editCard', username='guest', deckTitle=deckTitle, cardIndex=cardIndex ) }}" style="text-decoration:none">
+    <a href="{{ url_for('editCard', username=username, deckTitle=deckTitle, cardIndex=cardIndex ) }}" style="text-decoration:none">
         <button class="button2">Edit</button>
     </a>
 
