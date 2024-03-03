@@ -22,6 +22,17 @@ h3 {
   font-size: 55px;
 }
 
+p {
+  color: #e1948d;
+  text-align: center;
+  font-size: 25px;
+}
+
+p a{
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 .box {
   display: flex;
   justify-content: center;
@@ -41,6 +52,10 @@ h3 {
   color: #FAFAFA;
   text-align: center;
   font-size: 55px;
+}
+
+.delete-deck {
+  font-size: 40px;
 }
 
 .add-deck h3 {
@@ -266,4 +281,26 @@ h3 {
   justify-content: center;
   align-items: center;
   margin: auto;
+}
+
+#close-icon {
+  position: absolute;
+  top: 35%;
+  left: 13%;
+  transform: translate(-50%, -50%);
+}
+
+#card-form textarea {
+  font-family: sans-serif;
+  color: #e1948d;
+  text-align: center;
+  font-size: 55px;
+  text-transform: uppercase;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  width: 40rem;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

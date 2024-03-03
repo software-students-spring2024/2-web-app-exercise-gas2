@@ -1,0 +1,5 @@
+{% macro logout() %}
+  <form action="{{ url_for('logout') }}" method="post">
+    <button type="submit" class="button2"> Logout </button>
+  </form>
+{% endmacro %}

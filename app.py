@@ -3,6 +3,7 @@ from flask_login import current_user
 from authentication import *
 from db import * 
 import random
+import json
 
 app = Flask(__name__)
 login_manager.init_app(app)
@@ -31,6 +32,10 @@ def login():
 def signup():
     return auth_signup()
 
+@app.route('/logout', methods=["GET", "POST"])
+def logout():
+    return auth_logout()
+
 @app.route("/<username>/decks")
 def allDecks(username):
     if username == "guest":
@@ -52,7 +57,7 @@ def displayDeck(username, deckTitle):
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
-        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=json.dumps(cardList), isAuth=False)
     else:
         # authenticate user
         if (not current_user.is_authenticated or current_user.id != username):
@@ -68,7 +73,7 @@ def displayDeck(username, deckTitle):
         cardList = currentDeck['cards']
         # shuffle deck
         random.shuffle(cardList)
-        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=cardList)
+        return render_template('card.html', deckTitle=deckTitle, username=username, cardList=json.dumps(cardList), isAuth=True)
 
 # TODO: change createDeck to addDeck for naming consistency
 @app.route("/<username>/create", methods=["POST"])
@@ -83,8 +88,9 @@ def createDeck(username):
     # TODO: is there a way to not have to refresh the page and add the new deck 
     return redirect(url_for('allDecks', username=username))
 
-@app.route("/<username>/<deckTitle>/add", methods=["POST"])
-def addCard(username, deckTitle):
+# since shuffled, maybe should be cardQuestion instead of cardIndex?
+@app.route("/<username>/<deckTitle>/<cardIndex>/add", methods=["POST"])
+def addCard(username, deckTitle, cardIndex):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
@@ -112,27 +118,25 @@ def editCard(username, deckTitle, cardIndex):
     # TODO: is there a way to not have to refresh the page and show the edited card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
-@app.route("/<username>/<deckTitle>/<cardIndex>/delete")
+@app.route("/<username>/<deckTitle>/<cardIndex>/delete", methods=["POST"])
 def deleteCard(username, deckTitle, cardIndex):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
-    newCard = request.form["question"]
+    cardQuestion = request.form["question"]
     db.users.update_one(
         {"user_id": username, "personalDecks.title": deckTitle},
-        {"$pull": {"personalDecks.$.cards": newCard}}
+        {"$pull": {"personalDecks.$.cards": cardQuestion}}
     )
-    # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the previous card 
     return redirect(url_for('displayDeck', username=username, deckTitle=deckTitle))
 
-@app.route("/<username>/<deckTitle>/delete")
+@app.route("/<username>/<deckTitle>/delete", methods=['GET', 'POST'])
 def deleteDeck(username, deckTitle):
     # authenticate user
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
     db.users.update_one({"user_id": username}, {"$pull": {"personalDecks": {"title": deckTitle}}})
-    # would rendirect to decks
     # TODO: is there a way to not have to refresh the page when deleting deck
     return redirect(url_for('allDecks', username=username))
 
