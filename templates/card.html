@@ -65,10 +65,20 @@
                 cardIndex -= 1;
                 nextQuestion.textContent = cardList[cardIndex]
                 next.style.opacity = 1
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="initial"
+                    document.querySelector("#delete-card-button").style.display="initial"
+                }
             }
             if (cardIndex == -1){
                 nextQuestion.textContent = "START"
                 prev.style.opacity = 0.2
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#delete-card-button").style.display="none"
+                }
             }
             console.log(cardIndex)
             console.log(cardList)
@@ -83,9 +93,19 @@
                 cardIndex += 1
                 nextQuestion.textContent = cardList[cardIndex]
                 prev.style.opacity = 1.0
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="initial"
+                    document.querySelector("#delete-card-button").style.display="initial"
+                }
             }
             if (cardIndex == cardList.length-1) {
                 next.style.opacity = 0.2
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="none"
+                    document.querySelector("#edit-card-button").style.display="none"
+                    document.querySelector("#delete-card-button").style.display="none"
+                }
             }
             console.log(cardIndex)
             console.log(cardList)
