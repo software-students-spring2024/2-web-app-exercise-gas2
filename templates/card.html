@@ -7,7 +7,7 @@
     </div>
 
     <div class="question-box">
-        <button id="prevButton" class="card-button">&#8249;</button>
+        <button id="prevButton" class="card-button" style="opacity: 0.2">&#8249;</button>
 
         <div id="card" class="card-question">
             <h3 id="next-question"> START </h3>
@@ -40,6 +40,7 @@
 
     {% endif %}
 
+
     <script>
         const nextQuestion = document.querySelector("#next-question");
         const card = document.querySelector("#card");
@@ -60,16 +61,19 @@
 
         // event listener for prev button click
         function prevCard() {
-            if (cardIndex > 0) {
+            if (cardIndex > -1) {
                 cardIndex -= 1;
-                nextQuestion.textContent = cardList[cardIndex];
+                nextQuestion.textContent = cardList[cardIndex]
+                next.style.opacity = 1
                 if (isAuth) {
                     document.querySelector("#add-card-button").style.display="initial"
                     document.querySelector("#edit-card-button").style.display="initial"
                     document.querySelector("#delete-card-button").style.display="initial"
                 }
-            } else {
-                nextQuestion.textContent = "START";
+            }
+            if (cardIndex == -1){
+                nextQuestion.textContent = "START"
+                prev.style.opacity = 0.2
                 if (isAuth) {
                     document.querySelector("#add-card-button").style.display="initial"
                     document.querySelector("#edit-card-button").style.display="none"
@@ -81,23 +85,27 @@
         prev.addEventListener("click", prevCard);
 
         // event listener for both card click and next button click
+
         function nextCard() {
-            if (isAuth && cardIndex == -1) {
-                document.querySelector("#add-card-button").style.display="initial"
-                document.querySelector("#edit-card-button").style.display="initial"
-                document.querySelector("#delete-card-button").style.display="initial"
-            }
             if (cardIndex < cardList.length-1) {
-                cardIndex += 1;
-                nextQuestion.textContent = cardList[cardIndex];
-                if (isAuth && cardIndex == cardList.length-1) {
+                cardIndex += 1
+                nextQuestion.textContent = cardList[cardIndex]
+                prev.style.opacity = 1.0
+                if (isAuth) {
+                    document.querySelector("#add-card-button").style.display="initial"
+                    document.querySelector("#edit-card-button").style.display="initial"
+                    document.querySelector("#delete-card-button").style.display="initial"
+                }
+            }
+            if (cardIndex == cardList.length-1) {
+                next.style.opacity = 0.2
+                if (isAuth) {
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
                     document.querySelector("#delete-card-button").style.display="none"
                 }
             }
         }
-
         card.addEventListener("click", nextCard);
         next.addEventListener("click", nextCard);
         
@@ -127,9 +135,9 @@
                     document.querySelector("#edit-card-button").style.display="none"
                     document.querySelector("#delete-card-button").style.display="none"
                     document.querySelector("#card-form").style.display="initial"
-                    document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
+                    document.querySelector("#card-form textarea").textContent = cardList[cardIndex]
 
-                    document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
+                    document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/edit"
                 })
             }
 
