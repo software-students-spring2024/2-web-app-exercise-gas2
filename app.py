@@ -108,13 +108,14 @@ def addCard(username, deckTitle, cardIndex):
 @app.route("/<username>/<deckTitle>/<cardIndex>/edit", methods=["POST"])
 def editCard(username, deckTitle, cardIndex):
     # authenticate user
-    if (not current_user.is_authenticated or current_user.id != username):
-        return redirect(url_for('login'))
+    # if (not current_user.is_authenticated or current_user.id != username):
+    #     return redirect(url_for('login'))
     newCard = request.form["question"]
+    oldCard = request.form["oldQuestion"]
     db.users.update_one(
         {"user_id": username, "personalDecks.title": deckTitle},
         {"$set": {"personalDecks.$[deck].cards.$[card]": newCard}},
-        array_filters=[{"deck.title": deckTitle}, {"card": newCard}]
+        array_filters=[{"deck.title": deckTitle}, {"card": oldCard}]
     )
     # would redirect to template for Cards
     # TODO: is there a way to not have to refresh the page and show the edited card 
