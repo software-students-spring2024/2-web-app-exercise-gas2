@@ -139,9 +139,9 @@
                     document.querySelector("#edit-card-button").style.display="none"
                     document.querySelector("#delete-card-button").style.display="none"
                     document.querySelector("#card-form").style.display="initial"
-                    document.querySelector("#card-form textarea").textContent = cardList[cardIndex-1]
+                    document.querySelector("#card-form textarea").textContent = cardList[cardIndex]
 
-                    document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + (cardIndex-1) + "/edit"
+                    document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/edit"
                 })
             }
 
