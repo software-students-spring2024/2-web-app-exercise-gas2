@@ -88,7 +88,6 @@ def createDeck(username):
     # TODO: is there a way to not have to refresh the page and add the new deck 
     return redirect(url_for('allDecks', username=username))
 
-# since shuffled, maybe should be cardQuestion instead of cardIndex?
 @app.route("/<username>/<deckTitle>/<cardIndex>/add", methods=["POST"])
 def addCard(username, deckTitle, cardIndex):
     # authenticate user
