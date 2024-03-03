@@ -146,11 +146,21 @@
             const closeIcon = document.querySelector("#close-icon")
             if (closeIcon) {
                 closeIcon.addEventListener("click", function() {
-                    document.querySelector("#next-question").style.display="initial"
-                    document.querySelector("#add-card-button").style.display="initial"
-                    document.querySelector("#edit-card-button").style.display="initial"
-                    document.querySelector("#delete-card-button").style.display="initial"
+                    if (cardIndex == -1){
+                        document.querySelector("#next-question").style.display="initial"
+                        document.querySelector("#add-card-button").style.display="initial"
+                        document.querySelector("#edit-card-button").style.display="none"
+                        document.querySelector("#delete-card-button").style.display="none"
+                    }
+                    else {
+                        document.querySelector("#next-question").style.display="initial"
+                        document.querySelector("#add-card-button").style.display="initial"
+                        document.querySelector("#edit-card-button").style.display="initial"
+                        document.querySelector("#delete-card-button").style.display="initial"   
+                    }
                     document.querySelector("#card-form").style.display="none"
+                    document.querySelector("#card-form textarea").textContent = ""
+                    document.querySelector("#card-form input").value = ""
                 })
             }
 
