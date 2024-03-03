@@ -124,7 +124,7 @@ p a{
 
 }
 
-.add-deck-form {
+/* #add-deck-form {
   position: fixed;
   top: 50%;
   top: 50%;
@@ -141,40 +141,52 @@ p a{
   border-radius: .5rem;
   background: #7F5F59;
   text-align: center;
-}
+} */
 
-.add-deck-form input[type=submit] {
+/* #add-deck-form input[type=submit] {
   color: #63514F;
   background: #D9D9D9;
   text-align: center;
   font-size: 55px; 
   border-radius: .5rem;
   padding: 40px;
-}
+} */
 
-.add-deck-form input[type=text] {
-  color: #63514F;
-  background: #D9D9D9;
+#add-deck-form input[type=text] {
+  color: #fafafa;
+  background-color: transparent;
   text-align: center;
   font-size: 55px; 
-  border-radius: .5rem;
+  border: none; 
+  outline: none; 
+
 }
 
-.add-deck-form label {
+/* #add-deck-form label {
   color: #D9D9D9;
   text-align: center;
   font-size: 55px; 
   border-radius: .5rem;
-}
+} */
 
-.add-deck-form p {
-  position: absolute;
-  top: .1rem;
-  left: 1rem;
-  color: #D9D9D9;
-  font-size: 55px; 
-  margin: 0;
-}
+#add-deck-form p {
+  /* position: absolute; */
+  /* top: .1rem; */
+  /* left: 1rem; */
+  color: #fafafa;
+  /* margin: 0; */
+} 
+
+/* .add-deck-input {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 90%;
+  aspect-ratio: 9 / 5;
+
+} */
 
 .vertical-align {
   display: flex;
