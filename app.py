@@ -21,10 +21,10 @@ def home():
         elif 'sign-up' in request.form:
             return redirect(url_for('signup'))
         elif 'play-as-guest' in request.form:
-            return redirect(url_for('allDecks', username='guest', isAuth=False))
+            return redirect(url_for('allDecks', username='guest'))
     if request.method == 'GET':
         if (current_user.is_authenticated):
-            return redirect(url_for('allDecks', username=current_user.id, isAuth=True))
+            return redirect(url_for('allDecks', username=current_user.id))
     return render_template('start.html')
 
 # Handle authentication related stuff in authentication.py file
