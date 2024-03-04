@@ -149,6 +149,8 @@
                     document.querySelector("#card-form textarea").textContent = cardList[cardIndex]
                     document.querySelector("#card-form input").value = cardList[cardIndex]
 
+                    document.querySelector("#question-box").style.display="none"
+
                     document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/edit"
                 })
             }
