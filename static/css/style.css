@@ -55,7 +55,15 @@ p a{
 }
 
 .delete-deck {
+  position: relative;
   font-size: 40px;
+  top: 50;
+  left: 0;
+  color: #5e4d47;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .add-deck h3 {
