@@ -8,6 +8,10 @@
     />
   </head>
   <body>
+    {% if isAuth %} 
+      {% from 'macros.html' import logout %}
+      {{ logout() }}
+    {% endif %}
     <div class="container">
       <header>
         <a href="{{ url_for('home')}}" style="text-decoration:none">
