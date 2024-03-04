@@ -34,7 +34,7 @@
         searchBar.addEventListener("input", function() {
             const searchTerm = searchBar.value.toLowerCase();
             deckLinks.forEach(function(link) {
-                const deckTitle = link.querySelector(".deck-title").textContent.toLowerCase();
+                const deckTitle = link.querySelector("h3").textContent.toLowerCase();
                 if (deckTitle.includes(searchTerm)) {
                     link.style.display = "block";
                 } else {
