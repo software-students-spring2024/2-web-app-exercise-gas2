@@ -29,9 +29,10 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
+    # Find user data in the database
     data = db['users'].find_one({"user_id": user_id})
     if (data):
-        return User(data['user_id'], data['password'])
+        return User(data['user_id'], data['password']) # Return user object if found
     else:
         return None
 
@@ -43,11 +44,11 @@ def auth_login():
         password = request.form["password"]
         user = load_user(user_id)
         if user and user.verify_password(password):
-            # TODO: Redirect to the appropriate page for the logged in user
+            # Redirecting to the appropriate page for the logged in user
             login_user(user)
             return redirect('/' + user_id + '/decks')
         else:
-            return render_template('login.html', invalid_login=True)
+            return render_template('login.html', invalid_login=True) # Login failed - render invalid login message
     else:
         return render_template('login.html', invalid_login=False)
 
@@ -58,14 +59,16 @@ def auth_signup():
         password = request.form["password"]
         confirm_password =  request.form["confirm-password"]
         if load_user(user_id):
-            return render_template('signup.html', username_taken=True, passwords_dont_match=False)
+            return render_template('signup.html', username_taken=True, passwords_dont_match=False) # Render username taken message
         elif password != confirm_password:
-            return render_template('signup.html', username_taken=False, passwords_dont_match=True)
+            return render_template('signup.html', username_taken=False, passwords_dont_match=True) # Render password mismatch message
         else:
+            # Generating hashed password for user
             user = User(user_id, generate_password_hash(password))
+            # Adding new user to the database
             db['users'].insert_one({"user_id": user.id, "password": user.password, "personalDecks": []})
             login_user(user)
-            # TODO: Redirect to the appropriate page for the logged in user
+            # Redirect to the appropriate page for the logged in user
             return redirect('/' + user_id + '/decks')
 
     else:
@@ -73,5 +76,5 @@ def auth_signup():
 
 def auth_logout():
     logout_user()
-    return redirect('/')
+    return redirect('/') # Redirecting to home page upon logout
 

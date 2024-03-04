@@ -51,24 +51,28 @@
 
 
     <script>
+        // Selecting DOm elements
         const nextQuestion = document.querySelector("#next-question");
         const card = document.querySelector("#card");
         const prev = document.querySelector("#prevButton");
         const next = document.querySelector("#nextButton");
         const isAuth = ("{{ isAuth }}" == "True")
 
+        // cardIndex = -1 indicates card == "START"
         var cardIndex = -1;
         var questions = '{{ cardList }}'
 
+        // Processing questions string
         questions = questions.replaceAll("&#39;","'")
         questions = questions.replaceAll("&#34;","\"")
         questions = questions.replaceAll("\r","")
         questions = questions.replaceAll("\n","")
 
+        // parsing cardList JSON string
         var cardList = Array.from(JSON.parse(questions))
         cardList.push("END OF DECK")
 
-        // event listener for prev button click
+        // Function for navigating to the previous card
         function prevCard() {
             if (cardIndex > -1) {
                 cardIndex -= 1;
@@ -91,10 +95,10 @@
             }
         }
 
+        // Adding event listener to previous button
         prev.addEventListener("click", prevCard);
 
-        // event listener for both card click and next button click
-
+        // Function for navigating to the next card
         function nextCard() {
             if (cardIndex < cardList.length-1) {
                 cardIndex += 1
@@ -115,17 +119,22 @@
                 }
             }
         }
+        // Adding event listeners for next carc
         card.addEventListener("click", nextCard);
         next.addEventListener("click", nextCard);
         
         if (isAuth) {
             const username = "{{ username }}"
             let deckTitle = "{{ deckTitle }}"
+
+            // Replacing HTML entities with characters in deck title
             deckTitle = deckTitle.replaceAll("&#39;","'")
 
+            // Adding event listener for 'Add Card' button
             const addButton = document.querySelector("#add-card-button")
             if (addButton) {
                 addButton.addEventListener("click", async function() {
+                    // Hiding elements and displaying card form
                     document.querySelector("#next-question").style.display="none"
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
@@ -134,13 +143,16 @@
 
                     document.querySelector("#question-box").style.display="none"
 
+                    // Setting form action for adding a card
                     document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
                 })
             }
 
+            // Adding event listener for 'Edit' button
             const editButton = document.querySelector("#edit-card-button")
             if (editButton){
                 editButton.addEventListener("click", function() {
+                    // Hiding elements and displaying card form with current card content
                     document.querySelector("#next-question").style.display="none"
                     document.querySelector("#add-card-button").style.display="none"
                     document.querySelector("#edit-card-button").style.display="none"
@@ -151,13 +163,16 @@
 
                     document.querySelector("#question-box").style.display="none"
 
+                    // Setting form action for editing a card
                     document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/edit"
                 })
             }
 
+            // Adding event listener for close icon
             const closeIcon = document.querySelector("#close-icon")
             if (closeIcon) {
                 closeIcon.addEventListener("click", function() {
+                    // Handling display of elements based on card index
                     if (cardIndex == -1){
                         document.querySelector("#next-question").style.display="initial"
                         document.querySelector("#add-card-button").style.display="initial"
@@ -170,6 +185,7 @@
                         document.querySelector("#edit-card-button").style.display="initial"
                         document.querySelector("#delete-card-button").style.display="initial"   
                     }
+                    // Resetting card form content and displaying question box
                     document.querySelector("#card-form").style.display="none"
                     document.querySelector("#card-form textarea").textContent = ""
                     document.querySelector("#card-form input").value = ""
@@ -177,9 +193,11 @@
                 })
             }
 
+            // Add event listener for 'Delete Card' button
             const deleteButton = document.querySelector("#delete-card-button")
             if (deleteButton) {
                 deleteButton.addEventListener("click", async function() {
+                    // Getting question to be deleted and setting form action for deletion
                     const question= document.querySelector("#next-question").textContent
                     document.querySelector("#delete-form-question").value = question
                     console.log(document.querySelector("#delete-form-question").value)
