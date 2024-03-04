@@ -264,3 +264,13 @@ p a{
 #card-form textarea:focus {
   outline: none; 
 }
+
+.logout {
+  float: right;
+  background-color: #7d6f6b;
+  color: #FAFAFA;
+  font-size: 30px;
+  border-radius: 4px;
+  font-weight: bold;
+  padding: 20px;
+}

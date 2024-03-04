@@ -8,8 +8,15 @@
     />
   </head>
   <body>
+
+    {% if isAuth %}
+        <a class="logout" href="{{ url_for('logout') }} " style="text-decoration:none">Logout</a>
+    {% endif %}
+
+
     <div class="container">
       <header>
+        
         <a href="{{ url_for('home')}}" style="text-decoration:none">
           <h1>DIVE DEEPER</h1>
         </a>
