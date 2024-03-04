@@ -15,7 +15,7 @@
     {% endfor %}
 
     {% for deck in personalDecks %}
-        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">>
+        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
             <div class="personal-deck" >
                 <form action="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" method="post">
                     <input type="hidden" name="username" value="{{ username }}">
