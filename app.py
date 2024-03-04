@@ -90,6 +90,13 @@ def createDeck(username):
     if (not current_user.is_authenticated or current_user.id != username):
         return redirect(url_for('login'))
     title = request.form["title"]
+
+    # Check if the title already exists in personalDecks
+    existingDeck = db.users.find_one({"user_id": username, "personalDecks.title": title})
+    # if title already exists, don't create new deck
+    if existingDeck:
+        return redirect(url_for('allDecks', username=username))
+    
     newDeck = {"title": title, "cards": []}
     db.users.update_one({"user_id": username}, {"$push": {"personalDecks": newDeck}})
     # would rendirect to decks

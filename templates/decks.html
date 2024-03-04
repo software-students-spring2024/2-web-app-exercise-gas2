@@ -15,13 +15,13 @@
     {% endfor %}
 
     {% for deck in personalDecks %}
-        <form action="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" method="post">
-            <input type="hidden" name="username" value="{{ username }}">
-            <input type="hidden" name="deckTitle" value="{{ deck.title }}">
-            <button type="submit" class="delete-deck">Delete Deck</button>
-        </form>
         <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">>
             <div class="personal-deck" >
+                <form action="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" method="post">
+                    <input type="hidden" name="username" value="{{ username }}">
+                    <input type="hidden" name="deckTitle" value="{{ deck.title }}">
+                    <button type="submit" class="delete-deck">X</button>
+                </form>
                 <h3>{{ deck.title }}</h3>
             </div>
         </a>
@@ -34,7 +34,7 @@
         searchBar.addEventListener("input", function() {
             const searchTerm = searchBar.value.toLowerCase();
             deckLinks.forEach(function(link) {
-                const deckTitle = link.querySelector(".deck-title").textContent.toLowerCase();
+                const deckTitle = link.querySelector("h3").textContent.toLowerCase();
                 if (deckTitle.includes(searchTerm)) {
                     link.style.display = "block";
                 } else {

@@ -10,11 +10,11 @@
         {% endif %}
         <input class="user-input" type="password" name="password" placeholder="Password" required>
         <input class="user-input" type="password" name="confirm-password" placeholder="Confirm Password" required>
-        {% if passwords_dont_match %}
-            <p class="signup-error"> The passwords don't match. </p> 
-        {% endif %}
         <input class="button" type="submit" value="Sign Up">
     </form>
 </div>
+{% if passwords_dont_match %}
+    <p class="signup-error"> The passwords don't match. </p> 
+{% endif %}
 
 {% endblock %}

@@ -55,7 +55,15 @@ p a{
 }
 
 .delete-deck {
+  position: relative;
   font-size: 40px;
+  top: 50;
+  left: 0;
+  color: #5e4d47;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .add-deck h3 {
@@ -124,34 +132,6 @@ p a{
 
 }
 
-/* #add-deck-form {
-  position: fixed;
-  top: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin: auto;
-  width: 90%;
-  aspect-ratio: 8 / 5;
-  padding: 10px;
-  margin-bottom: 10%; 
-  border-radius: .5rem;
-  background: #7F5F59;
-  text-align: center;
-} */
-
-/* #add-deck-form input[type=submit] {
-  color: #63514F;
-  background: #D9D9D9;
-  text-align: center;
-  font-size: 55px; 
-  border-radius: .5rem;
-  padding: 40px;
-} */
-
 #add-deck-form input[type=text] {
   color: #fafafa;
   background-color: transparent;
@@ -162,31 +142,9 @@ p a{
 
 }
 
-/* #add-deck-form label {
-  color: #D9D9D9;
-  text-align: center;
-  font-size: 55px; 
-  border-radius: .5rem;
-} */
-
 #add-deck-form p {
-  /* position: absolute; */
-  /* top: .1rem; */
-  /* left: 1rem; */
   color: #fafafa;
-  /* margin: 0; */
 } 
-
-/* .add-deck-input {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  width: 90%;
-  aspect-ratio: 9 / 5;
-
-} */
 
 .vertical-align {
   display: flex;
@@ -264,7 +222,7 @@ p a{
 }
 
 .signup-error, .login-error {
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .search-container {
