@@ -21,7 +21,7 @@
             <button type="submit" class="delete-deck">Delete Deck</button>
         </form>
         <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">>
-            <button class="personal-deck" >
+            <div class="personal-deck" >
                 <h3>{{ deck.title }}</h3>
             </div>
         </a>
