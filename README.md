@@ -1,4 +1,8 @@
-# Web Application Exercise
+# Dive Deeper
+
+<img src="static/images/otter2.gif" width="100" height="120">
+
+## Web Application Exercise
 
 A little exercise to build a web application following an agile development process. See the [instructions](instructions.md) for more detail.
 
@@ -22,7 +26,7 @@ A web app card game that fosters deeper connections with others through question
 
 ## Task boards
 
-[Sprint 1 Task Board](https://github.com/orgs/software-students-spring2024/projects/4)
+[Sprint 1 Task Board](https://github.com/orgs/software-students-spring2024/projects/4) <br>
 [Sprint 2 Task Board](https://github.com/orgs/software-students-spring2024/projects/22/)
 
 ## Design
