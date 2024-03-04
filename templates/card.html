@@ -6,17 +6,35 @@
         <h2> {{ deckTitle }}</h2>
     </div>
 
-    <div class="question-box">
+    <div class="question-box" id="question-box">
         <button id="prevButton" class="card-button" style="opacity: 0.2">&#8249;</button>
 
         <div id="card" class="card-question">
             <h3 id="next-question"> START </h3>
         </div>
-        
+
         <button id="nextButton" class="card-button">&#8250;</button>
+        
     </div>
 
     {% if isAuth %}
+
+        <form method="post" id="card-form" style="display: none">
+            <div class="question-box">
+                <div class="card-question">
+                    <div class="vertical-align">
+                        <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="120px" height="120px">
+                            <circle fill="#63514F" cx="15" cy="15" r="10" />
+                            <path fill="#D9D9D9" d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16.414,15 c0,0,3.139,3.139,3.293,3.293c0.391,0.391,0.391,1.024,0,1.414c-0.391,0.391-1.024,0.391-1.414,0C18.139,19.554,15,16.414,15,16.414 s-3.139,3.139-3.293,3.293c-0.391,0.391-1.024,0.391-1.414,0c-0.391-0.391-0.391-1.024,0-1.414C10.446,18.139,13.586,15,13.586,15 s-3.139-3.139-3.293-3.293c-0.391-0.391-0.391-1.024,0-1.414c0.391-0.391,1.024-0.391,1.414,0C11.861,10.446,15,13.586,15,13.586 s3.139-3.139,3.293-3.293c0.391-0.391,1.024-0.391,1.414,0c0.391,0.391,0.391,1.024,0,1.414C19.554,11.861,16.414,15,16.414,15z"/>
+                        </svg>
+                        <textarea name="question" required placeholder="Type..."></textarea>
+                        <input type="hidden" name="oldQuestion"> 
+                        <button class="button">Done</button>
+                    </div>
+                   
+                </div>
+            </div>
+        </form>
 
         <button id="add-card-button" class="button2" >Add Card</button>
         <button id="edit-card-button" class="button2" style="display: none">Edit</button>
@@ -24,16 +42,6 @@
         <form method="post" id="delete-form">
             <input type="hidden" name="question" id="delete-form-question" value=""></input>
             <button id="delete-card-button" class="button2" style="display: none">Delete Card</button>
-        </form>
-
-        <form method="post" id="card-form" style="display: none">
-            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="120px" height="120px">
-                <circle fill="#63514F" cx="15" cy="15" r="10" />
-                <path fill="#D9D9D9" d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16.414,15 c0,0,3.139,3.139,3.293,3.293c0.391,0.391,0.391,1.024,0,1.414c-0.391,0.391-1.024,0.391-1.414,0C18.139,19.554,15,16.414,15,16.414 s-3.139,3.139-3.293,3.293c-0.391,0.391-1.024,0.391-1.414,0c-0.391-0.391-0.391-1.024,0-1.414C10.446,18.139,13.586,15,13.586,15 s-3.139-3.139-3.293-3.293c-0.391-0.391-0.391-1.024,0-1.414c0.391-0.391,1.024-0.391,1.414,0C11.861,10.446,15,13.586,15,13.586 s3.139-3.139,3.293-3.293c0.391-0.391,1.024-0.391,1.414,0c0.391,0.391,0.391,1.024,0,1.414C19.554,11.861,16.414,15,16.414,15z"/>
-            </svg>
-            <textarea name="question" required></textarea>
-            <input type="hidden" name="oldQuestion">
-            <button class="button2">Done</button>
         </form>
 
         {% from 'macros.html' import logout %}
@@ -124,6 +132,8 @@
                     document.querySelector("#delete-card-button").style.display="none"
                     document.querySelector("#card-form").style.display="initial"
 
+                    document.querySelector("#question-box").style.display="none"
+
                     document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/add"
                 })
             }
@@ -138,6 +148,8 @@
                     document.querySelector("#card-form").style.display="initial"
                     document.querySelector("#card-form textarea").textContent = cardList[cardIndex]
                     document.querySelector("#card-form input").value = cardList[cardIndex]
+
+                    document.querySelector("#question-box").style.display="none"
 
                     document.querySelector("#card-form").action="/" + username + "/" + deckTitle + "/" + cardIndex + "/edit"
                 })
@@ -161,6 +173,7 @@
                     document.querySelector("#card-form").style.display="none"
                     document.querySelector("#card-form textarea").textContent = ""
                     document.querySelector("#card-form input").value = ""
+                    document.querySelector("#question-box").style.display="flex"
                 })
             }
 

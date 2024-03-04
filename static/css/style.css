@@ -299,8 +299,10 @@ p a{
   padding-top: 7rem;
   padding-bottom: 7rem;
   width: 40rem;
-  position: absolute;
-  top: 47%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+
+}
+#card-form textarea:focus {
+  outline: none; 
 }
