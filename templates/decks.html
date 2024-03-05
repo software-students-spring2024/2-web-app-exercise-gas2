@@ -17,16 +17,15 @@
     {% for deck in personalDecks %}
         <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
             <div class="personal-deck" >
-
-                <a href="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" class="delete-deck">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
-                        <i class="fa-regular fa-trash-can fa-stack-1x fa-inverse " style="color:#382c2b"></i>
-                    </span>
-                </a>
+                <object>
+                    <a href="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" class="delete-deck">
+                        <span class="fa-stack fa-4x">
+                            <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
+                            <i class="fa-regular fa-trash-can fa-stack-1x fa-inverse " style="color:#382c2b"></i>
+                        </span>
+                    </a>
+                </object>
                 <h3>{{ deck.title }}</h3>
-
-                
             </div>
         </a>
     {% endfor %}
