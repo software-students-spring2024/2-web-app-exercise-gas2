@@ -140,12 +140,8 @@ p a{
   font-size: 55px; 
   border: none; 
   outline: none; 
-
+  font-weight: bold;
 }
-
-#add-deck-form p {
-  color: #fafafa;
-} 
 
 .vertical-align {
   display: flex;
@@ -263,4 +259,11 @@ p a{
   border-radius: 4px;
   font-weight: bold;
   padding: 20px;
+}
+
+
+#add-deck-form .user-input {
+  position: absolute;
+  width: 80%;
+  bottom: 7%;
 }
