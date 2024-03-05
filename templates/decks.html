@@ -49,12 +49,15 @@
 
     {% if isAuth %} 
 
-        <form action="{{ url_for('createDeck', username=username) }}" method="post" id="add-deck-form" class="personal-deck" style="display: none">
-            <div class="vertical-align">
-                <p>CANCEL</p>
-                <input type="text" name="title" placeholder="Type..." required>
-                <input class="user-input" type="submit" name="create" value="CREATE DECK" />
+        <form action="{{ url_for('createDeck', username=username) }}" class="personal-deck" method="post" id="add-deck-form" style="display: none">
+            <div id="close-icon" class="icon-top-left">
+                <span class="fa-stack fa-4x">
+                    <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
+                    <i class="fa-solid fa-xmark fa-stack-1x" style="color:#382c2b"></i>
+                </span>
             </div>
+            <input type="text" name="title" placeholder="Type..." required>
+            <input class="user-input" type="submit" name="create" value="CREATE DECK" />
         </form>
         
         <div class="add-deck">
@@ -66,14 +69,13 @@
             addDeck.addEventListener("click", function() {
                 document.querySelector("#add-deck-form").style.display="flex"
             })
-            const exitAddDeck = document.querySelector("#add-deck-form p")
+            const exitAddDeck = document.querySelector("#add-deck-form #close-icon")
             exitAddDeck.addEventListener("click", function() {
                 document.querySelector("#add-deck-form").style.display="none"
             })
         </script>
 
     {% endif %}
-
 
 {% endblock %}
 
