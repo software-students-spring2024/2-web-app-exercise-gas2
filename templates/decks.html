@@ -13,16 +13,20 @@
             </div>
         </a>
     {% endfor %}
-
+   
     {% for deck in personalDecks %}
         <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
             <div class="personal-deck" >
-                <form action="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" method="post">
-                    <input type="hidden" name="username" value="{{ username }}">
-                    <input type="hidden" name="deckTitle" value="{{ deck.title }}">
-                    <button type="submit" class="delete-deck">X</button>
-                </form>
+
+                <a href="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" class="delete-deck">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
+                        <i class="fa-regular fa-trash-can fa-stack-1x fa-inverse " style="color:#382c2b"></i>
+                    </span>
+                </a>
                 <h3>{{ deck.title }}</h3>
+
+                
             </div>
         </a>
     {% endfor %}

@@ -54,16 +54,12 @@ p a{
   font-size: 55px;
 }
 
+
+
 .delete-deck {
-  position: relative;
-  font-size: 40px;
-  top: 50;
-  left: 0;
-  color: #5e4d47;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+  position: absolute;
+  top: -7%;
+  left: -7%;
 }
 
 .add-deck h3 {
@@ -125,6 +121,9 @@ p a{
 
 .personal-deck {
   background: #e1948d;
+  display: flex;
+  align-items: center; 
+  position: relative;
 }
 
 .add-deck {
