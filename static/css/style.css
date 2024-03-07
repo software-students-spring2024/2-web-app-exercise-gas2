@@ -248,8 +248,7 @@ p a{
   align-items: center;
   margin: auto;
   color: #fafafa;
-  /* background-color: #7d6f6b; */
-  background-color: #b2a29d;
+  background-color: #7d6f6b;
 }
 #searchBar::placeholder {
   font-weight: bold;
