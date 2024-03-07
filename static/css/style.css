@@ -1,3 +1,14 @@
+/*
+Color Scheme
+
+Pink: e1948d
+White: fafafa
+Brown: 5e4d47
+Grey-Brown: 7d6f6b
+Pink-Brown: 7F5F59
+
+*/
+
 body {
   font-family: sans-serif;
   background: #5e4d47;
@@ -227,15 +238,22 @@ p a{
 }
 
 #searchBar {
-  width: 90%;
+  width: 92%;
   padding: 15px;
-  font-size: 25px;
+  font-size: 35px;
   border-radius: 5px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
+  color: #fafafa;
+  background-color: #7d6f6b;
+}
+#searchBar::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: #d2c1bd;
 }
 
 .text-card {
