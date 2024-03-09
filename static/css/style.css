@@ -67,10 +67,10 @@ p a{
 
 
 
-.icon-top-left {
+.icon-top-right {
   position: absolute;
   top: -7%;
-  left: -7%;
+  right: -7%;
 }
 
 .add-deck h3 {
@@ -327,10 +327,6 @@ p a{
 .frog-image {
   height: 500px;
 }
-
-/* .deck-container {
-  position: relative;
-} */
 
 .deck-link {
   height: 100%;
