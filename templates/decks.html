@@ -16,9 +16,9 @@
    
     {% for deck in personalDecks %}
         <div class="personal-deck" >
-                <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
-                    <h3>{{ deck.title }}</h3>
-                </a>
+            <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
+                <h3>{{ deck.title }}</h3>
+            </a>
             <div onclick="document.getElementById('modal-id').style.display='block'" class="icon-top-right">
                 <span class="fa-stack fa-4x">
                     <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
@@ -26,18 +26,9 @@
                 </span>
             </div>
         </div>
-
-        <div id="modal-id" class="modal">
-            <!-- <span onclick="document.getElementById('modal-id').style.display='none'" class="close" title="Close Modal">&times;</span> -->
-            
-            <form class="modal-content" action="/action_page.php">
+        <div id="modal-id" class="modal">            
+            <form class="modal-content">
                 <div class="modal-container">
-                    <div id="close-icon" class="icon-top-right">
-                        <span class="fa-stack fa-4x">
-                            <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
-                            <i class="fa-solid fa-xmark fa-stack-1x" style="color:#382c2b"></i>
-                        </span>
-                    </div>
                     <h3>Delete Deck</h3>
                     <img class="frog-image" src="/static/images/are_you_shore_frog.png" alt="are_you_shore_frog.png">
                     <button type="button" class="button" onclick="document.getElementById('modal-id').style.display='none'">Cancel</button>
@@ -45,11 +36,16 @@
                         <button type="button" class="button2">Delete</button>
                     </a>
                 </div>
+                <div class="icon-top-right" onclick="document.getElementById('modal-id').style.display='none'">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
+                        <i class="fa-solid fa-xmark fa-stack-1x" style="color:#382c2b"></i>
+                    </span>
+                </div>
             </form>
-            
         </div>
     {% endfor %}
-
+ 
     <!-- script to have modal close upon click outside -->
     <script>
         // get modal
