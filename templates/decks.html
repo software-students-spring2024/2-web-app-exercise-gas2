@@ -15,20 +15,48 @@
     {% endfor %}
    
     {% for deck in personalDecks %}
-        <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
-            <div class="personal-deck" >
-                <object>
-                    <a href="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}" class="icon-top-left">
-                        <span class="fa-stack fa-4x">
-                            <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
-                            <i class="fa-regular fa-trash-can fa-stack-1x fa-inverse " style="color:#382c2b"></i>
-                        </span>
-                    </a>
-                </object>
+        <div class="personal-deck" >
+            <a href="{{ url_for('displayDeck', username=username, deckTitle=deck.title) }}" style="text-decoration:none" class="deck-link">
                 <h3>{{ deck.title }}</h3>
+            </a>
+            <div onclick="document.getElementById('modal-{{ deck.title }}').style.display='block'" class="icon-top-right">
+                <span class="fa-stack fa-4x">
+                    <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
+                    <i class="fa-regular fa-trash-can fa-stack-1x fa-inverse " style="color:#382c2b"></i>
+                </span>
             </div>
-        </a>
+        </div>
+
+        <div id="modal-{{ deck.title }}" class="modal">            
+            <form class="modal-content">
+                <div class="modal-container">
+                    <h3>Delete Deck</h3>
+                    <img class="frog-image" src="/static/images/are_you_shore_frog.png" alt="are_you_shore_frog.png">
+                    <div class="button-container">
+                        <button type="button" class="button" onclick="document.getElementById('modal-{{ deck.title }}').style.display='none'">Cancel</button>
+                        <a href="{{ url_for('deleteDeck', username=username, deckTitle=deck.title) }}">
+                            <button type="button" class="button2">Delete</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- script to have modal close upon click outside -->
+        <script>
+            // get modal
+            var modal = document.getElementById('modal-{{ deck.title }}');
+            
+            // when user clicks outside modal, close 
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            }
+        </script>
     {% endfor %}
+ 
+
 
     <script>
         const searchBar = document.getElementById("searchBar");
@@ -50,7 +78,7 @@
     {% if isAuth %} 
 
         <form action="{{ url_for('createDeck', username=username) }}" class="personal-deck" method="post" id="add-deck-form" style="display: none">
-            <div id="close-icon" class="icon-top-left">
+            <div id="close-icon" class="icon-top-right">
                 <span class="fa-stack fa-4x">
                     <i class="fa-solid fa-circle fa-stack-2x " style="color:#eae1df"></i>
                     <i class="fa-solid fa-xmark fa-stack-1x" style="color:#382c2b"></i>
