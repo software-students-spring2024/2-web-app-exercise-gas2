@@ -327,3 +327,15 @@ p a{
 .frog-image {
   height: 500px;
 }
+
+/* .deck-container {
+  position: relative;
+} */
+
+.deck-link {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
