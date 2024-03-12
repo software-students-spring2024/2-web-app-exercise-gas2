@@ -1,5 +1,7 @@
 # Dive Deeper
 
+Play Dive Deeper [here](https://two-web-app-exercise-gas2.onrender.com)!
+
 <img src="static/images/otter2.gif" width="100" height="120">
 
 ## Web Application Exercise
